@@ -1,0 +1,37 @@
+{% extends "render/topolayout.html" %}
+{% import 'render/macro' as macro %}
+{% block headscript %}
+    {{ macro.render_chart_dependencies(chart) }}
+{% endblock %}
+
+{% block title_and_others %}
+    <div class="alert alert-primary" role="alert">
+        图表示例
+    </div>
+{% endblock %}
+
+{% block widget %}{% endblock %}
+
+{% block graph %}
+    {{ macro.render_chart_content(chart) }}
+{% endblock %}
+
+{% block messages %}
+    <div>
+        <p><strong>生成方法：</strong></p>
+        <p>详见generate.py文件</p>
+        <p><strong>下一步工作：</strong></p>
+        <ul>
+            <li>格式化json文件</li>
+            <li>制作交换机图标和端口</li>
+
+        </ul>
+        <p><strong>再下一步工作：</strong></p>
+        <ul>
+            <li>在页面上编写控件，通过修改json更新拓扑图</li>
+            <li>[可选]在拓扑图的组件上使用tooltip</li>
+
+        </ul>
+    </div>
+
+{% endblock %}
