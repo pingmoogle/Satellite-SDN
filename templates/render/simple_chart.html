@@ -1,0 +1,48 @@
+{% extends "render/topolayout.html" %}
+{% import 'render/macro' as macro %}
+{% block headscript %}
+    {{ macro.render_chart_dependencies(chart) }}
+{% endblock %}
+
+{% block title_and_others %}
+    <div class="alert alert-primary" role="alert">
+        图表示例
+    </div>
+{% endblock %}
+
+{% block widget %}{% endblock %}
+
+{% block graph %}
+    {#    <div>#}
+    {#        <iframe width="100%" height="600px" frameborder="no"#}
+    {#                src="topographs/graph_base.html"></iframe>#}
+    {#    </div>#}
+    {{ macro.render_chart_content(chart) }}
+{% endblock %}
+
+{% block messages %}
+    <div>
+        <p><strong>实现过程：</strong></p>
+        <p>首先在app.py加入两个route，一个为topo，用来导航到这个页面
+            ，另一个为topograph，用来找到生成的拓扑图（拓扑图是以html形式保存的）</p>
+        <p>topo导航到topoExample.html，topograph导航到templates/topos，通过自定义参数
+            “graphname”，可以选择不同的拓扑图文件</p>
+        <p>本着前后端分离的理念，用来生成拓扑图的json和py放到了独立的文件夹/topo里。生成的拓扑图放到了
+            /templates/topos里，同时方便使用render_templates方法</p>
+        <p><strong>生成方法：</strong></p>
+        <p>详见generate.py文件</p>
+        <p><strong>下一步工作：</strong></p>
+        <ul>
+            <li>格式化json文件</li>
+            <li>制作交换机图标和端口</li>
+
+        </ul>
+        <p><strong>再下一步工作：</strong></p>
+        <ul>
+            <li>在页面上编写控件，通过修改json更新拓扑图</li>
+            <li>[可选]在拓扑图的组件上使用tooltip</li>
+
+        </ul>
+    </div>
+
+{% endblock %}

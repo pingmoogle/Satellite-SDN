@@ -1,16 +1,22 @@
-{% extends "layout.html" %}
+{% extends "render/topolayout.html" %}
 
-{% block content %}
-
+{% block title_and_others %}
     <div class="alert alert-primary" role="alert">
         图表示例
     </div>
+{% endblock %}
 
-    <div>
-        <iframe width="100%" height="600px" frameborder="no"
-                src="topographs/graph_base.html"></iframe>
-    </div>
+{% block widget %}{% endblock %}
 
+{% block graph %}
+{#    <div>#}
+{#        <iframe width="100%" height="600px" frameborder="no"#}
+{#                src="topographs/graph_base.html"></iframe>#}
+{#    </div>#}
+    {{ macro.render_chart_content(chart) }}
+{% endblock %}
+
+{% block messages %}
     <div>
         <p><strong>实现过程：</strong></p>
         <p>首先在app.py加入两个route，一个为topo，用来导航到这个页面
