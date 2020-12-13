@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_from_directory
+from topo.funs import generate
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ def home():
 
 @app.route('/topo', methods=['GET', 'POST'])
 def topo():
+    generate.newgraph()
     return render_template(
         "topos/graph_page.html",
         title="Topo Demo",

@@ -18,13 +18,6 @@
 
 {% block messages %}
     <div>
-        <p><strong>实现过程：</strong></p>
-        <p>首先在app.py加入两个route，一个为topo，用来导航到这个页面
-            ，另一个为topograph，用来找到生成的拓扑图（拓扑图是以html形式保存的）</p>
-        <p>topo导航到topoExample.html，topograph导航到templates/topos，通过自定义参数
-            “graphname”，可以选择不同的拓扑图文件</p>
-        <p>本着前后端分离的理念，用来生成拓扑图的json和py放到了独立的文件夹/topo里。生成的拓扑图放到了
-            /templates/topos里，同时方便使用render_templates方法</p>
         <p><strong>生成方法：</strong></p>
         <p>详见generate.py文件</p>
         <p><strong>下一步工作：</strong></p>
