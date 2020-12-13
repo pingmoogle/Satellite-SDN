@@ -15,7 +15,7 @@ def home():
 @app.route('/topo', methods=['GET', 'POST'])
 def topo():
     return render_template(
-        "topos/graph_base.html",
+        "topos/graph_page.html",
         title="Topo Demo",
     )
 

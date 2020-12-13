@@ -14,14 +14,15 @@ if __name__ == '__main__':
         {"source": "1", "target": "3"}
     ]
 
-    CurrentConfig.GLOBAL_ENV=Environment(loader=FileSystemLoader("../../templates"))
+    CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("../../templates"))
     c = (
         Graph(init_opts={
-            "chart_id": "graph1"
+            "chart_id": "graph1",
+            "width": "1108px"
         })
-            .add("", nodes, links, repulsion=800,)
+            .add("", nodes, links, repulsion=800)
             .set_global_opts(title_opts=opts.TitleOpts(title=""))
-            .render("../../templates/topos/graph_base.html",
+            .render("../../templates/topos/graph_page.html",
                     template_name="render/simple_chart.html")
 
     )
