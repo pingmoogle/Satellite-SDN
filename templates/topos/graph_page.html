@@ -58,6 +58,9 @@
     </div>
 
     
+
+
+
     
     <div id="graph1" class="chart-container" style="width:1108px; height:500px;"></div>
     <script>
@@ -108,7 +111,7 @@
                 "rotateLabel": false
             },
             "force": {
-                "repulsion": 800,
+                "repulsion": 3000,
                 "edgeLength": 50,
                 "gravity": 0.2
             },
@@ -130,15 +133,18 @@
             "data": [
                 {
                     "name": "1",
-                    "symbolSize": 20
+                    "symbolSize": 80,
+                    "symbol": "image://static/svgs/orange.svg"
                 },
                 {
                     "name": "2",
-                    "symbolSize": 20
+                    "symbolSize": 80,
+                    "symbol": "image://static/svgs/orange.svg"
                 },
                 {
                     "name": "3",
-                    "symbolSize": 20
+                    "symbolSize": 80,
+                    "symbol": "image://static/svgs/orange.svg"
                 }
             ],
             "edgeLabel": {
@@ -156,8 +162,8 @@
                     "source": "1",
                     "target": "2",
                     "symbol": [
-                        "triangle",
-                        "triangle"
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ],
                     "symbolSize": 20
                 },
