@@ -2,31 +2,23 @@ from jinja2 import Environment, FileSystemLoader
 from pyecharts import options as opts
 from pyecharts.charts import Graph
 from pyecharts.globals import CurrentConfig
-
+from .dealJSON import  dealjson
 
 def newgraph():
     # TODO: json文件如何解析？
-    nodes = [
-        {"name": "1", "symbolSize": 20, "symbol": "image://static/svgs/orange.svg", "symbolSize": 80},
-        {"name": "2", "symbolSize": 20, "symbol": "image://static/svgs/orange.svg", "symbolSize": 80},
-        {"name": "3", "symbolSize": 20, "symbol": "image://static/svgs/orange.svg", "symbolSize": 80}
-    ]
-    links = [
-        {"source": "1", "target": "2", "symbol": ["image://static/svgs/32-20e3.svg", "image://static/svgs/34-20e3.svg"], "symbolSize": 20},
-        {"source": "1", "target": "3"}
-    ]
 
+    str = "topo/data/topo.json"
+    nodes, links = dealjson(str)
     CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("templates"))
     c = (
         Graph(init_opts={
             "chart_id": "graph1",
             "width": "1108px"
         })
-            .add("", nodes, links, repulsion=3000)
-            .set_global_opts(title_opts=opts.TitleOpts(title=""))
-            .render("templates/topos/graph_page.html",
-                    template_name="render/simple_chart.html")
-
+        .add("", nodes, links, repulsion=3000)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Satellite-sdn topo"))
+        .render("templates/topos/graph_page.html",
+                template_name="render/simple_chart.html")
     )
 
 
