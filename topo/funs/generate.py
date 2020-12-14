@@ -7,13 +7,14 @@ from topo.funs import dealJSON
 def newgraph():
     # TODO: json文件如何解析？
 
-    str = "topo/data/topo.json"
+    str = "topo/data/topo66.json"
     nodes, links = dealJSON.dealjson(str)
     CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("templates"))
     c = (
         Graph(init_opts={
             "chart_id": "graph1",
-            "width": "1108px"
+            "width": "1108px",
+            "height": "800px"
         })
         .add("", nodes, links, repulsion=3000, gravity=0.6, symbol_size=50
              , symbol="image://static/svgs/orange.svg")
