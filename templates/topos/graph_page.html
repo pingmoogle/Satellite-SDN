@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> - Satellite SDN</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+    
+    
+        <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand">Satellite SDN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/topo">Topo</a>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container body-content">
+    
+    <br><br><br><br>
+    
+    
+    <div class="alert alert-primary" role="alert">
+        图表示例
+    </div>
+
+    
+
+
+
+    
+    <div id="graph1" class="chart-container" style="width:1108px; height:500px;"></div>
+    <script>
+        var chart_graph1 = echarts.init(
+            document.getElementById('graph1'), 'white', {renderer: 'canvas'});
+        
+        var option_graph1 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "graph",
+            "layout": "force",
+            "symbol": "image://static/svgs/orange.svg",
+            "symbolSize": 50,
+            "circular": {
+                "rotateLabel": false
+            },
+            "force": {
+                "repulsion": 3000,
+                "edgeLength": 50,
+                "gravity": 0.6
+            },
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "roam": true,
+            "draggable": false,
+            "focusNodeAdjacency": true,
+            "data": [
+                {
+                    "name": 64,
+                    "fixed": false
+                },
+                {
+                    "name": 65,
+                    "fixed": false
+                },
+                {
+                    "name": 66,
+                    "fixed": false
+                },
+                {
+                    "name": 73,
+                    "fixed": false
+                },
+                {
+                    "name": 74,
+                    "fixed": false
+                },
+                {
+                    "name": 75,
+                    "fixed": false
+                },
+                {
+                    "name": 76,
+                    "fixed": false
+                },
+                {
+                    "name": 13,
+                    "fixed": false
+                },
+                {
+                    "name": 77,
+                    "fixed": false
+                },
+                {
+                    "name": 14,
+                    "fixed": false
+                },
+                {
+                    "name": 78,
+                    "fixed": false
+                },
+                {
+                    "name": 15,
+                    "fixed": false
+                },
+                {
+                    "name": 16,
+                    "fixed": false
+                },
+                {
+                    "name": 17,
+                    "fixed": false
+                },
+                {
+                    "name": 18,
+                    "fixed": false
+                },
+                {
+                    "name": 25,
+                    "fixed": false
+                },
+                {
+                    "name": 26,
+                    "fixed": false
+                },
+                {
+                    "name": 27,
+                    "fixed": false
+                },
+                {
+                    "name": 28,
+                    "fixed": false
+                },
+                {
+                    "name": 29,
+                    "fixed": false
+                },
+                {
+                    "name": 30,
+                    "fixed": false
+                },
+                {
+                    "name": 37,
+                    "fixed": false
+                },
+                {
+                    "name": 38,
+                    "fixed": false
+                },
+                {
+                    "name": 39,
+                    "fixed": false
+                },
+                {
+                    "name": 40,
+                    "fixed": false
+                },
+                {
+                    "name": 41,
+                    "fixed": false
+                },
+                {
+                    "name": 42,
+                    "fixed": false
+                },
+                {
+                    "name": 49,
+                    "fixed": false
+                },
+                {
+                    "name": 50,
+                    "fixed": false
+                },
+                {
+                    "name": 51,
+                    "fixed": false
+                },
+                {
+                    "name": 52,
+                    "fixed": false
+                },
+                {
+                    "name": 53,
+                    "fixed": false
+                },
+                {
+                    "name": 54,
+                    "fixed": false
+                },
+                {
+                    "name": 61,
+                    "fixed": false
+                },
+                {
+                    "name": 62,
+                    "fixed": false
+                },
+                {
+                    "name": 63,
+                    "fixed": false
+                }
+            ],
+            "edgeLabel": {
+                "show": false,
+                "position": "top",
+                "margin": 8
+            },
+            "edgeSymbol": [
+                null,
+                null
+            ],
+            "edgeSymbolSize": 10,
+            "links": [
+                {
+                    "source": 64,
+                    "target": 65,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 64,
+                    "target": 63,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 65,
+                    "target": 66,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 65,
+                    "target": 64,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 65,
+                    "target": 53,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 65,
+                    "target": 77,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 66,
+                    "target": 65,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 66,
+                    "target": 54,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 66,
+                    "target": 78,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 73,
+                    "target": 74,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 73,
+                    "target": 61,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 74,
+                    "target": 75,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 74,
+                    "target": 73,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 75,
+                    "target": 76,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 75,
+                    "target": 74,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 76,
+                    "target": 77,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 76,
+                    "target": 75,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 13,
+                    "target": 14,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 13,
+                    "target": 25,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 77,
+                    "target": 78,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 77,
+                    "target": 76,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 77,
+                    "target": 65,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 14,
+                    "target": 15,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 14,
+                    "target": 13,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 14,
+                    "target": 26,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 78,
+                    "target": 77,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 78,
+                    "target": 66,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 15,
+                    "target": 16,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 15,
+                    "target": 14,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 15,
+                    "target": 27,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 16,
+                    "target": 17,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 16,
+                    "target": 15,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 17,
+                    "target": 18,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 17,
+                    "target": 16,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 18,
+                    "target": 17,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 25,
+                    "target": 26,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 25,
+                    "target": 13,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 25,
+                    "target": 37,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 26,
+                    "target": 27,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 26,
+                    "target": 25,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 26,
+                    "target": 14,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 26,
+                    "target": 38,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 27,
+                    "target": 28,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 27,
+                    "target": 26,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 27,
+                    "target": 15,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 27,
+                    "target": 39,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 28,
+                    "target": 29,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 28,
+                    "target": 27,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 29,
+                    "target": 30,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 29,
+                    "target": 28,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 30,
+                    "target": 29,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 30,
+                    "target": 42,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 37,
+                    "target": 38,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 37,
+                    "target": 25,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 37,
+                    "target": 49,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 38,
+                    "target": 39,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 38,
+                    "target": 37,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 38,
+                    "target": 26,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 38,
+                    "target": 50,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 39,
+                    "target": 40,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 39,
+                    "target": 38,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 39,
+                    "target": 27,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 40,
+                    "target": 41,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 40,
+                    "target": 39,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 41,
+                    "target": 42,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 41,
+                    "target": 40,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 42,
+                    "target": 41,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 42,
+                    "target": 30,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 42,
+                    "target": 54,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 49,
+                    "target": 50,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 49,
+                    "target": 37,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 49,
+                    "target": 61,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 50,
+                    "target": 51,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 50,
+                    "target": 49,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 50,
+                    "target": 38,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 50,
+                    "target": 62,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 51,
+                    "target": 52,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 51,
+                    "target": 50,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 52,
+                    "target": 53,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 52,
+                    "target": 51,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 53,
+                    "target": 54,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 53,
+                    "target": 52,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 53,
+                    "target": 65,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 54,
+                    "target": 53,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 54,
+                    "target": 42,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 54,
+                    "target": 66,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 61,
+                    "target": 62,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 61,
+                    "target": 49,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 61,
+                    "target": 73,
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 62,
+                    "target": 63,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 62,
+                    "target": 61,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 62,
+                    "target": 50,
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 63,
+                    "target": 64,
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": 63,
+                    "target": 62,
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                }
+            ]
+        }
+    ],
+    "legend": [
+        {
+            "data": [],
+            "selected": {},
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "title": [
+        {
+            "text": "Satellite-sdn topo",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ]
+};
+        chart_graph1.setOption(option_graph1);
+        
+        
+    </script>
+
+    
+    <div>
+        <p><strong>生成方法：</strong></p>
+        <p>详见generate.py文件</p>
+        <p><strong>下一步工作：</strong></p>
+        <ul>
+            <li>格式化json文件</li>
+            <li>制作交换机图标和端口</li>
+
+        </ul>
+        <p><strong>再下一步工作：</strong></p>
+        <ul>
+            <li>在页面上编写控件，通过修改json更新拓扑图</li>
+            <li>[可选]在拓扑图的组件上使用tooltip</li>
+
+        </ul>
+    </div>
+
+
+
+
+    <hr/>
+    
+    <footer>
+        <p>&copy; 2020 - Satellite SDN</p>
+    </footer>
+</div>
+
+<script src="/static/js/bootstrap.js"></script>
+
+
+</body>
+</html>
