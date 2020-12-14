@@ -16,7 +16,7 @@
 
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand">Satellite SDN</a>
+    <a class="navbar-brand user-select-none">Satellite SDN</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,11 +58,50 @@
     </div>
 
     
+    <div class="container">
+        <div class="row">
+            <div class="col-auto mr-auto">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">自定义网络结构json文件上传：</label>
+                        <input type="file" class="form-control-file" id="diyjsonfile">
+                    </div>
+                </form>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-success">上传JSON</button>
+            </div>
 
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">No.</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Numbers" aria-label="num" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-success col-auto">一些按钮</button>
+                <button type="button" class="btn btn-success col-auto mr-auto">还有一些按钮</button>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-auto mr-auto">
+                &nbsp;
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-success">预览效果</button>
+                <button type="button" class="btn btn-primary">保存并刷新</button>
+            </div>
 
+        </div>
+    </div>
+<br>
 
     
-    <div id="graph1" class="chart-container" style="width:1108px; height:800px;"></div>
+    <div id="graph1" class="chart-container border" style="width:1108px; height:800px;"></div>
     <script>
         var chart_graph1 = echarts.init(
             document.getElementById('graph1'), 'white', {renderer: 'canvas'});
@@ -2461,7 +2500,7 @@
         <p><strong>再下一步工作：</strong></p>
         <ul>
             <li>在页面上编写控件，通过修改json更新拓扑图</li>
-            <li>[可选]在拓扑图的组件上使用tooltip</li>
+            <li>[可选] 在拓扑图的组件上使用tooltip</li>
 
         </ul>
     </div>
