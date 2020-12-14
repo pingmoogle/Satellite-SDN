@@ -4,7 +4,7 @@ from pyecharts import options as opts
 def dealjson(data: str):
     with open(data, "r", encoding="utf-8") as f:
         j = json.load(f)
-        topo_data = j["topo"][0]["discribe"]
+        topo_data = j["topo"][0]["describe"]
 
     nodes = []
     link = []
