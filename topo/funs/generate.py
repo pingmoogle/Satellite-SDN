@@ -7,7 +7,7 @@ from topo.funs import dealJSON
 def newgraph():
     # TODO: json文件如何解析？
 
-    str = "topo/data/topo66.json"
+    str = "topo66.json"
     nodes, links = dealJSON.dealjson(str)
     CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("templates"))
     c = (
