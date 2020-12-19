@@ -1,10 +1,11 @@
 import json
 from pyecharts import options as opts
+from topo.funs import seekFile
+
 
 def dealjson(data: str):
-    with open(data, "r", encoding="utf-8") as f:
-        j = json.load(f)
-        topo_data = j["topo"][0]["discribe"]
+    f = seekFile.seekJson(data)
+    topo_data = f["topo"][0]["describe"]
 
     nodes = []
     link = []
