@@ -5,7 +5,6 @@ from pyecharts.globals import CurrentConfig
 from topo.funs import dealJSON
 
 def newgraph():
-    # TODO: json文件如何解析？
 
     str = "topo66.json"
     nodes, links = dealJSON.dealjson(str)
@@ -19,8 +18,8 @@ def newgraph():
         .add("", nodes, links, repulsion=3000, gravity=0.6, symbol_size=50
              , symbol="image://static/svgs/orange.svg")
         .set_global_opts(title_opts=opts.TitleOpts(title="Satellite-sdn topo"))
-        .render("templates/topos/graph_page.html",
-                template_name="render/simple_chart.html")
+        .render("templates/topos/graph_page.html",  # 目标文件
+                template_name="render/simple_chart.html") # 模板
     )
 
 

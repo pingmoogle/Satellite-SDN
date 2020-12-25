@@ -10,10 +10,10 @@ def dealjson(data: str):
     nodes = []
     link = []
     for i in topo_data:
-        a = i['LeoID']
+        a = str(i['LeoID'])
         nodes.append(opts.GraphNode(name=a))
         for j in i["neighbor"]:
-            link.append({"source": a, "target": j["NbID"], "LocalPort": j["LocalPort"], "NbPort": j["NbPort"]})
+            link.append({"source": a, "target": str(j["NbID"]), "LocalPort": j["LocalPort"], "NbPort": j["NbPort"]})
     links = []
     for i in link:
         tmp = []
@@ -21,5 +21,7 @@ def dealjson(data: str):
         tmp.append("image://static/svgs/3" + str(i["NbPort"]) + "-20e3.svg")
         i["symbol"] = tmp
         del tmp
-        links.append(opts.GraphLink(source=i["source"], target=i["target"], symbol=i["symbol"]))
+        ce = opts.GraphLink(source=i["source"], target=i["target"], symbol=i["symbol"])
+        print(i["source"], i["target"], i["symbol"])
+        links.append(ce)
     return nodes, links
