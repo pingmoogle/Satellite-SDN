@@ -43,7 +43,16 @@
         </div><br>
         <div class="row">
             <div class="col-auto mr-auto">
-                &nbsp;
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="inputTopo">Topo</label>
+                      <select name="TopoName" id="inputTopo" class="form-control">
+                        <option selected value="topo66.json">topo66</option>
+                        <option value="topo.json">topo</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-success">预览效果</button>
