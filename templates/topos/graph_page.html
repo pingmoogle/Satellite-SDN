@@ -49,44 +49,42 @@
     <div class="container">
         <div class="row">
             <div class="col-auto mr-auto">
-                <form>
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">自定义网络结构json文件上传：</label>
-                        <input type="file" class="form-control-file" id="diyjsonfile">
+                        <label for="inputTopo">Topo</label>
+                        <select name="TopoName" id="inputTopo" class="form-control">
+                            <option selected value="topo66.json">topo66</option>
+                            <option value="topo.json">topo</option>
+                        </select>
                     </div>
+                    <button type="submit" class="btn btn-primary">更换拓扑</button>
                 </form>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-success">上传JSON</button>
-            </div>
+                <div class="form-group">
 
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <div class="input-group flex-nowrap">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">No.</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Numbers" aria-label="num" aria-describedby="addon-wrapping">
+                    <label for="exampleFormControlTextarea1">删除节点之间的连接</label>
+                    <input class="form-control" id="node1">
+                    <input class="form-control" id="node2">
+                    <button onclick="deleteLink()">删除连接</button>
+                    <script>
+                        deleteLink = function (){
+                            const node1 = document.getElementById("node1").value;
+                            const node2 = document.getElementById("node2").value;
+                            for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                if (option_graph1.series[0].links[i].source === node1
+                                    && option_graph1.series[0].links[i].target === node2) {
+                                    option_graph1.series[0].links.splice(i, 1)
+                                }
+                                if (option_graph1.series[0].links[i].source === node2
+                                    && option_graph1.series[0].links[i].target === node1) {
+                                    option_graph1.series[0].links.splice(i, 1)
+                                }
+                            }
+                            chart_graph1.setOption(option_graph1);
+                        }
+                    </script>
                 </div>
-            </div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-success col-auto">一些按钮</button>
-                <button type="button" class="btn btn-success col-auto mr-auto">还有一些按钮</button>
-            </div>
-        </div><br>
-        <div class="row">
-            <div class="col-auto mr-auto">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label for="inputTopo">Topo</label>
-                      <select name="TopoName" id="inputTopo" class="form-control">
-                        <option selected value="topo66.json">topo66</option>
-                        <option value="topo.json">topo</option>
-                      </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-success">预览效果</button>
@@ -95,7 +93,7 @@
 
         </div>
     </div>
-<br>
+    <br>
 
     
     <div id="graph1" class="chart-container border" style="width:1108px; height:800px;"></div>
@@ -169,31 +167,51 @@
             "focusNodeAdjacency": true,
             "data": [
                 {
-                    "name": "64",
+                    "name": "1",
                     "fixed": false
                 },
                 {
-                    "name": "65",
+                    "name": "2",
                     "fixed": false
                 },
                 {
-                    "name": "66",
+                    "name": "3",
                     "fixed": false
                 },
                 {
-                    "name": "73",
+                    "name": "4",
                     "fixed": false
                 },
                 {
-                    "name": "74",
+                    "name": "5",
                     "fixed": false
                 },
                 {
-                    "name": "75",
+                    "name": "6",
                     "fixed": false
                 },
                 {
-                    "name": "76",
+                    "name": "7",
+                    "fixed": false
+                },
+                {
+                    "name": "8",
+                    "fixed": false
+                },
+                {
+                    "name": "9",
+                    "fixed": false
+                },
+                {
+                    "name": "10",
+                    "fixed": false
+                },
+                {
+                    "name": "11",
+                    "fixed": false
+                },
+                {
+                    "name": "12",
                     "fixed": false
                 },
                 {
@@ -201,15 +219,7 @@
                     "fixed": false
                 },
                 {
-                    "name": "77",
-                    "fixed": false
-                },
-                {
                     "name": "14",
-                    "fixed": false
-                },
-                {
-                    "name": "78",
                     "fixed": false
                 },
                 {
@@ -226,6 +236,30 @@
                 },
                 {
                     "name": "18",
+                    "fixed": false
+                },
+                {
+                    "name": "19",
+                    "fixed": false
+                },
+                {
+                    "name": "20",
+                    "fixed": false
+                },
+                {
+                    "name": "21",
+                    "fixed": false
+                },
+                {
+                    "name": "22",
+                    "fixed": false
+                },
+                {
+                    "name": "23",
+                    "fixed": false
+                },
+                {
+                    "name": "24",
                     "fixed": false
                 },
                 {
@@ -253,6 +287,30 @@
                     "fixed": false
                 },
                 {
+                    "name": "31",
+                    "fixed": false
+                },
+                {
+                    "name": "32",
+                    "fixed": false
+                },
+                {
+                    "name": "33",
+                    "fixed": false
+                },
+                {
+                    "name": "34",
+                    "fixed": false
+                },
+                {
+                    "name": "35",
+                    "fixed": false
+                },
+                {
+                    "name": "36",
+                    "fixed": false
+                },
+                {
                     "name": "37",
                     "fixed": false
                 },
@@ -274,6 +332,30 @@
                 },
                 {
                     "name": "42",
+                    "fixed": false
+                },
+                {
+                    "name": "43",
+                    "fixed": false
+                },
+                {
+                    "name": "44",
+                    "fixed": false
+                },
+                {
+                    "name": "45",
+                    "fixed": false
+                },
+                {
+                    "name": "46",
+                    "fixed": false
+                },
+                {
+                    "name": "47",
+                    "fixed": false
+                },
+                {
+                    "name": "48",
                     "fixed": false
                 },
                 {
@@ -301,6 +383,30 @@
                     "fixed": false
                 },
                 {
+                    "name": "55",
+                    "fixed": false
+                },
+                {
+                    "name": "56",
+                    "fixed": false
+                },
+                {
+                    "name": "57",
+                    "fixed": false
+                },
+                {
+                    "name": "58",
+                    "fixed": false
+                },
+                {
+                    "name": "59",
+                    "fixed": false
+                },
+                {
+                    "name": "60",
+                    "fixed": false
+                },
+                {
                     "name": "61",
                     "fixed": false
                 },
@@ -310,6 +416,30 @@
                 },
                 {
                     "name": "63",
+                    "fixed": false
+                },
+                {
+                    "name": "64",
+                    "fixed": false
+                },
+                {
+                    "name": "65",
+                    "fixed": false
+                },
+                {
+                    "name": "66",
+                    "fixed": false
+                },
+                {
+                    "name": "67",
+                    "fixed": false
+                },
+                {
+                    "name": "68",
+                    "fixed": false
+                },
+                {
+                    "name": "69",
                     "fixed": false
                 }
             ],
@@ -325,139 +455,307 @@
             "edgeSymbolSize": 10,
             "links": [
                 {
-                    "source": "64",
-                    "target": "65",
+                    "source": "1",
+                    "target": "2",
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "64",
-                    "target": "63",
-                    "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "65",
-                    "target": "66",
-                    "symbol": [
-                        "image://static/svgs/31-20e3.svg",
-                        "image://static/svgs/32-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "65",
-                    "target": "64",
-                    "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "65",
-                    "target": "53",
-                    "symbol": [
-                        "image://static/svgs/33-20e3.svg",
-                        "image://static/svgs/34-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "65",
-                    "target": "77",
+                    "source": "1",
+                    "target": "12",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
-                    "source": "66",
-                    "target": "65",
+                    "source": "1",
+                    "target": "11",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
-                    "source": "66",
-                    "target": "54",
+                    "source": "1",
+                    "target": "67",
                     "symbol": [
-                        "image://static/svgs/33-20e3.svg",
-                        "image://static/svgs/34-20e3.svg"
+                        "image://static/svgs/35-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "66",
-                    "target": "78",
+                    "source": "2",
+                    "target": "3",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "2",
+                    "target": "13",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
-                    "source": "73",
-                    "target": "74",
+                    "source": "2",
+                    "target": "1",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "3",
+                    "target": "4",
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "73",
-                    "target": "61",
+                    "source": "3",
+                    "target": "14",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "3",
+                    "target": "2",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "4",
+                    "target": "5",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "4",
+                    "target": "15",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "4",
+                    "target": "3",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "5",
+                    "target": "6",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "5",
+                    "target": "16",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "5",
+                    "target": "4",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "6",
+                    "target": "7",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "6",
+                    "target": "17",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "6",
+                    "target": "5",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "7",
+                    "target": "8",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "7",
+                    "target": "18",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "7",
+                    "target": "6",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "8",
+                    "target": "9",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "8",
+                    "target": "19",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "8",
+                    "target": "7",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "9",
+                    "target": "10",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "9",
+                    "target": "20",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "9",
+                    "target": "8",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "10",
+                    "target": "11",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "10",
+                    "target": "21",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "10",
+                    "target": "9",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "11",
+                    "target": "1",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "11",
+                    "target": "22",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "11",
+                    "target": "10",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "12",
+                    "target": "13",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "12",
+                    "target": "23",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "12",
+                    "target": "22",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "12",
+                    "target": "1",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "74",
-                    "target": "75",
-                    "symbol": [
-                        "image://static/svgs/31-20e3.svg",
-                        "image://static/svgs/32-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "74",
-                    "target": "73",
-                    "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "75",
-                    "target": "76",
-                    "symbol": [
-                        "image://static/svgs/31-20e3.svg",
-                        "image://static/svgs/32-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "75",
-                    "target": "74",
-                    "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "76",
-                    "target": "77",
-                    "symbol": [
-                        "image://static/svgs/31-20e3.svg",
-                        "image://static/svgs/32-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "76",
-                    "target": "75",
-                    "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
@@ -470,31 +768,23 @@
                 },
                 {
                     "source": "13",
-                    "target": "25",
+                    "target": "24",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
-                    "source": "77",
-                    "target": "78",
-                    "symbol": [
-                        "image://static/svgs/31-20e3.svg",
-                        "image://static/svgs/32-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "77",
-                    "target": "76",
+                    "source": "13",
+                    "target": "12",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
-                    "source": "77",
-                    "target": "65",
+                    "source": "13",
+                    "target": "2",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
@@ -510,6 +800,14 @@
                 },
                 {
                     "source": "14",
+                    "target": "25",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "14",
                     "target": "13",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
@@ -518,23 +816,7 @@
                 },
                 {
                     "source": "14",
-                    "target": "26",
-                    "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "78",
-                    "target": "77",
-                    "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "78",
-                    "target": "66",
+                    "target": "3",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
@@ -550,6 +832,14 @@
                 },
                 {
                     "source": "15",
+                    "target": "26",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "15",
                     "target": "14",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
@@ -558,10 +848,10 @@
                 },
                 {
                     "source": "15",
-                    "target": "27",
+                    "target": "4",
                     "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -574,10 +864,26 @@
                 },
                 {
                     "source": "16",
+                    "target": "27",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "16",
                     "target": "15",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "16",
+                    "target": "5",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -590,10 +896,42 @@
                 },
                 {
                     "source": "17",
+                    "target": "28",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "17",
                     "target": "16",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "17",
+                    "target": "6",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "18",
+                    "target": "19",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "18",
+                    "target": "29",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
@@ -605,15 +943,199 @@
                     ]
                 },
                 {
-                    "source": "25",
-                    "target": "26",
+                    "source": "18",
+                    "target": "7",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "19",
+                    "target": "20",
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "25",
+                    "source": "19",
+                    "target": "30",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "19",
+                    "target": "18",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "19",
+                    "target": "8",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "20",
+                    "target": "21",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "20",
+                    "target": "31",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "20",
+                    "target": "19",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "20",
+                    "target": "9",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "21",
+                    "target": "22",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "21",
+                    "target": "32",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "21",
+                    "target": "20",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "21",
+                    "target": "10",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "22",
+                    "target": "12",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "22",
+                    "target": "33",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "22",
+                    "target": "21",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "22",
+                    "target": "11",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "23",
+                    "target": "24",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "23",
+                    "target": "34",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "23",
+                    "target": "33",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "23",
+                    "target": "12",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "24",
+                    "target": "25",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "24",
+                    "target": "35",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "24",
+                    "target": "23",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "24",
                     "target": "13",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
@@ -622,30 +1144,30 @@
                 },
                 {
                     "source": "25",
-                    "target": "37",
-                    "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "26",
-                    "target": "27",
+                    "target": "26",
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "26",
-                    "target": "25",
+                    "source": "25",
+                    "target": "36",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "25",
+                    "target": "24",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
-                    "source": "26",
+                    "source": "25",
                     "target": "14",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
@@ -654,30 +1176,30 @@
                 },
                 {
                     "source": "26",
-                    "target": "38",
-                    "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "27",
-                    "target": "28",
+                    "target": "27",
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "27",
-                    "target": "26",
+                    "source": "26",
+                    "target": "37",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "26",
+                    "target": "25",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
-                    "source": "27",
+                    "source": "26",
                     "target": "15",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
@@ -686,10 +1208,34 @@
                 },
                 {
                     "source": "27",
-                    "target": "39",
+                    "target": "28",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "27",
+                    "target": "38",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "27",
+                    "target": "26",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "27",
+                    "target": "16",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -702,10 +1248,34 @@
                 },
                 {
                     "source": "28",
+                    "target": "39",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "28",
                     "target": "27",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "28",
+                    "target": "17",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "28",
+                    "target": "68",
+                    "symbol": [
+                        "image://static/svgs/35-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
@@ -714,6 +1284,14 @@
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "29",
+                    "target": "40",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
@@ -725,6 +1303,30 @@
                     ]
                 },
                 {
+                    "source": "29",
+                    "target": "18",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "30",
+                    "target": "31",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "30",
+                    "target": "41",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
                     "source": "30",
                     "target": "29",
                     "symbol": [
@@ -734,6 +1336,22 @@
                 },
                 {
                     "source": "30",
+                    "target": "19",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "31",
+                    "target": "32",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "31",
                     "target": "42",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
@@ -741,15 +1359,175 @@
                     ]
                 },
                 {
-                    "source": "37",
-                    "target": "38",
+                    "source": "31",
+                    "target": "30",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "31",
+                    "target": "20",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "32",
+                    "target": "33",
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
-                    "source": "37",
+                    "source": "32",
+                    "target": "43",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "32",
+                    "target": "31",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "32",
+                    "target": "21",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "33",
+                    "target": "23",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "33",
+                    "target": "44",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "33",
+                    "target": "32",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "33",
+                    "target": "22",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "34",
+                    "target": "35",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "34",
+                    "target": "45",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "34",
+                    "target": "44",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "34",
+                    "target": "23",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "35",
+                    "target": "36",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "35",
+                    "target": "46",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "35",
+                    "target": "34",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "35",
+                    "target": "24",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "36",
+                    "target": "37",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "36",
+                    "target": "47",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "36",
+                    "target": "35",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "36",
                     "target": "25",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
@@ -758,10 +1536,34 @@
                 },
                 {
                     "source": "37",
-                    "target": "49",
+                    "target": "38",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "37",
+                    "target": "48",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "37",
+                    "target": "36",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "37",
+                    "target": "26",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -774,6 +1576,14 @@
                 },
                 {
                     "source": "38",
+                    "target": "49",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "38",
                     "target": "37",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
@@ -782,18 +1592,10 @@
                 },
                 {
                     "source": "38",
-                    "target": "26",
+                    "target": "27",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "38",
-                    "target": "50",
-                    "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
@@ -802,6 +1604,14 @@
                     "symbol": [
                         "image://static/svgs/31-20e3.svg",
                         "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "39",
+                    "target": "50",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
@@ -814,7 +1624,7 @@
                 },
                 {
                     "source": "39",
-                    "target": "27",
+                    "target": "28",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
@@ -830,10 +1640,26 @@
                 },
                 {
                     "source": "40",
+                    "target": "51",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "40",
                     "target": "39",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "40",
+                    "target": "29",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -846,10 +1672,42 @@
                 },
                 {
                     "source": "41",
+                    "target": "52",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "41",
                     "target": "40",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "41",
+                    "target": "30",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "42",
+                    "target": "43",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "42",
+                    "target": "53",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
@@ -862,18 +1720,202 @@
                 },
                 {
                     "source": "42",
-                    "target": "30",
+                    "target": "31",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
-                    "source": "42",
+                    "source": "43",
+                    "target": "44",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "43",
                     "target": "54",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "43",
+                    "target": "42",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "43",
+                    "target": "32",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "44",
+                    "target": "34",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "44",
+                    "target": "55",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "44",
+                    "target": "43",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "44",
+                    "target": "33",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "45",
+                    "target": "46",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "45",
+                    "target": "56",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "45",
+                    "target": "55",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "45",
+                    "target": "34",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "46",
+                    "target": "47",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "46",
+                    "target": "57",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "46",
+                    "target": "45",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "46",
+                    "target": "35",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "47",
+                    "target": "48",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "47",
+                    "target": "58",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "47",
+                    "target": "46",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "47",
+                    "target": "36",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "48",
+                    "target": "49",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "48",
+                    "target": "59",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "48",
+                    "target": "47",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "48",
+                    "target": "37",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -886,18 +1928,26 @@
                 },
                 {
                     "source": "49",
-                    "target": "37",
+                    "target": "60",
                     "symbol": [
-                        "image://static/svgs/33-20e3.svg",
-                        "image://static/svgs/34-20e3.svg"
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
                     "source": "49",
-                    "target": "61",
+                    "target": "48",
                     "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "49",
+                    "target": "38",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -910,6 +1960,14 @@
                 },
                 {
                     "source": "50",
+                    "target": "61",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "50",
                     "target": "49",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
@@ -918,18 +1976,10 @@
                 },
                 {
                     "source": "50",
-                    "target": "38",
+                    "target": "39",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
-                    ]
-                },
-                {
-                    "source": "50",
-                    "target": "62",
-                    "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
                     ]
                 },
                 {
@@ -942,10 +1992,26 @@
                 },
                 {
                     "source": "51",
+                    "target": "62",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "51",
                     "target": "50",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "51",
+                    "target": "40",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -958,10 +2024,26 @@
                 },
                 {
                     "source": "52",
+                    "target": "63",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "52",
                     "target": "51",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "52",
+                    "target": "41",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
@@ -974,6 +2056,14 @@
                 },
                 {
                     "source": "53",
+                    "target": "64",
+                    "symbol": [
+                        "image://static/svgs/34-20e3.svg",
+                        "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "53",
                     "target": "52",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
@@ -982,6 +2072,22 @@
                 },
                 {
                     "source": "53",
+                    "target": "42",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "54",
+                    "target": "55",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "54",
                     "target": "65",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
@@ -998,18 +2104,162 @@
                 },
                 {
                     "source": "54",
-                    "target": "42",
+                    "target": "43",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
-                    "source": "54",
+                    "source": "55",
+                    "target": "45",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "55",
                     "target": "66",
                     "symbol": [
                         "image://static/svgs/34-20e3.svg",
                         "image://static/svgs/33-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "55",
+                    "target": "54",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "55",
+                    "target": "44",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "56",
+                    "target": "57",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "56",
+                    "target": "45",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "56",
+                    "target": "66",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "57",
+                    "target": "58",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "57",
+                    "target": "46",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "57",
+                    "target": "56",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "58",
+                    "target": "59",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "58",
+                    "target": "47",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "58",
+                    "target": "57",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "59",
+                    "target": "60",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "59",
+                    "target": "48",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "59",
+                    "target": "58",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "60",
+                    "target": "61",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "60",
+                    "target": "49",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "60",
+                    "target": "59",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
@@ -1022,7 +2272,7 @@
                 },
                 {
                     "source": "61",
-                    "target": "49",
+                    "target": "50",
                     "symbol": [
                         "image://static/svgs/33-20e3.svg",
                         "image://static/svgs/34-20e3.svg"
@@ -1030,10 +2280,18 @@
                 },
                 {
                     "source": "61",
-                    "target": "73",
+                    "target": "60",
                     "symbol": [
-                        "image://static/svgs/34-20e3.svg",
-                        "image://static/svgs/33-20e3.svg"
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "61",
+                    "target": "69",
+                    "symbol": [
+                        "image://static/svgs/35-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
                     ]
                 },
                 {
@@ -1046,18 +2304,18 @@
                 },
                 {
                     "source": "62",
-                    "target": "61",
+                    "target": "51",
                     "symbol": [
-                        "image://static/svgs/32-20e3.svg",
-                        "image://static/svgs/31-20e3.svg"
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
                     ]
                 },
                 {
                     "source": "62",
-                    "target": "50",
+                    "target": "61",
                     "symbol": [
-                        "image://static/svgs/33-20e3.svg",
-                        "image://static/svgs/34-20e3.svg"
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
                     ]
                 },
                 {
@@ -1070,10 +2328,114 @@
                 },
                 {
                     "source": "63",
+                    "target": "52",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "63",
                     "target": "62",
                     "symbol": [
                         "image://static/svgs/32-20e3.svg",
                         "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "64",
+                    "target": "65",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "64",
+                    "target": "53",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "64",
+                    "target": "63",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "65",
+                    "target": "66",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "65",
+                    "target": "54",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "65",
+                    "target": "64",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "66",
+                    "target": "56",
+                    "symbol": [
+                        "image://static/svgs/31-20e3.svg",
+                        "image://static/svgs/32-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "66",
+                    "target": "65",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/31-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "66",
+                    "target": "55",
+                    "symbol": [
+                        "image://static/svgs/33-20e3.svg",
+                        "image://static/svgs/34-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "67",
+                    "target": "1",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/35-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "68",
+                    "target": "28",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/35-20e3.svg"
+                    ]
+                },
+                {
+                    "source": "69",
+                    "target": "61",
+                    "symbol": [
+                        "image://static/svgs/32-20e3.svg",
+                        "image://static/svgs/35-20e3.svg"
                     ]
                 }
             ]
