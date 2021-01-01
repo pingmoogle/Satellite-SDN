@@ -49,35 +49,42 @@
     <div class="container">
         <div class="row">
             <div class="col-auto mr-auto">
-                <form>
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">自定义网络结构json文件上传：</label>
-                        <input type="file" class="form-control-file" id="diyjsonfile">
+                        <label for="inputTopo">Topo</label>
+                        <select name="TopoName" id="inputTopo" class="form-control">
+                            <option selected value="topo66.json">topo66</option>
+                            <option value="topo.json">topo</option>
+                        </select>
                     </div>
+                    <button type="submit" class="btn btn-primary">更换拓扑</button>
                 </form>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-success">上传JSON</button>
-            </div>
+                <div class="form-group">
 
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <div class="input-group flex-nowrap">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">No.</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Numbers" aria-label="num" aria-describedby="addon-wrapping">
+                    <label for="exampleFormControlTextarea1">删除节点之间的连接</label>
+                    <input class="form-control" id="node1">
+                    <input class="form-control" id="node2">
+                    <button onclick="deleteLink()">删除连接</button>
+                    <script>
+                        deleteLink = function (){
+                            const node1 = document.getElementById("node1").value;
+                            const node2 = document.getElementById("node2").value;
+                            for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                if (option_graph1.series[0].links[i].source === node1
+                                    && option_graph1.series[0].links[i].target === node2) {
+                                    option_graph1.series[0].links.splice(i, 1)
+                                }
+                                if (option_graph1.series[0].links[i].source === node2
+                                    && option_graph1.series[0].links[i].target === node1) {
+                                    option_graph1.series[0].links.splice(i, 1)
+                                }
+                            }
+                            chart_graph1.setOption(option_graph1);
+                        }
+                    </script>
                 </div>
-            </div>
-            <div class="col-sm">
-                <button type="button" class="btn btn-success col-auto">一些按钮</button>
-                <button type="button" class="btn btn-success col-auto mr-auto">还有一些按钮</button>
-            </div>
-        </div><br>
-        <div class="row">
-            <div class="col-auto mr-auto">
-                &nbsp;
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-success">预览效果</button>
@@ -86,7 +93,7 @@
 
         </div>
     </div>
-<br>
+    <br>
 
     
     <div id="graph1" class="chart-container border" style="width:1108px; height:800px;"></div>

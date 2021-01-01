@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, request, send_from_directory
 from topo.funs import generate
 
 app = Flask(__name__)
@@ -22,6 +22,13 @@ def home():
 
 @app.route('/topo', methods=['GET', 'POST'])
 def topo():
+    if request.method == 'POST':
+        topoName = request.form.get("TopoName")
+        generate.newgraph(filename=topoName)
+        return  render_template(
+            "topos/graph_page.html",
+            title="Topo Demo",
+        )
     generate.newgraph()
     return render_template(
         "topos/graph_page.html",
@@ -37,4 +44,4 @@ def icon():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=True)

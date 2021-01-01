@@ -4,10 +4,9 @@ from pyecharts.charts import Graph
 from pyecharts.globals import CurrentConfig
 from topo.funs import dealJSON
 
-def newgraph():
+def newgraph(filename="topo66.json"):
 
-    str = "topo66.json"
-    nodes, links = dealJSON.dealjson(str)
+    nodes, links = dealJSON.dealjson(filename)
     CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("templates"))
     c = (
         Graph(init_opts={
