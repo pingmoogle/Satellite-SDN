@@ -24,6 +24,7 @@ def home():
 def topo():
     if request.method == 'POST':
         topoName = request.form.get("TopoName")
+        timeSlice = request.form.get("TimeSlice")
         generate.newgraph(filename=topoName)
         return  render_template(
             "topos/graph_page.html",

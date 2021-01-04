@@ -3,9 +3,9 @@ from pyecharts import options as opts
 from topo.funs import seekFile
 
 
-def dealjson(data: str):
+def dealjson(data: str, index:int):
     f = seekFile.seekJson(data)
-    topo_data = f["topo"][0]["describe"]
+    topo_data = f["topo"][index]["describe"]
 
     nodes = []
     link = []
