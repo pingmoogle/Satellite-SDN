@@ -16,10 +16,9 @@ def seekJson(fileName) -> dict:
     collection = db.jsonfiles
 
     result = collection.find_one({"fileName": "{0}".format(fileName)})
-    json2dict = json.loads(result["fileRaw"])
 
     client.close()
-    return json2dict
+    return result["fileRaw"]
 
 
 if __name__ == '__main__':

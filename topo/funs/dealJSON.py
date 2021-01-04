@@ -3,17 +3,17 @@ from pyecharts import options as opts
 from topo.funs import seekFile
 
 
-def dealjson(data: str, index:int):
+def dealjson(data: str, index: int):
     f = seekFile.seekJson(data)
     topo_data = f["topo"][index]["describe"]
 
     nodes = []
     link = []
     for i in topo_data:
-        a = str(i['LeoID'])
+        a = str(int(i['LeoID']))
         nodes.append(opts.GraphNode(name=a))
         for j in i["neighbor"]:
-            link.append({"source": a, "target": str(j["NbID"]), "LocalPort": j["LocalPort"], "NbPort": j["NbPort"]})
+            link.append({"source": a, "target": str(int(j["NbID"])), "LocalPort": int(j["LocalPort"]), "NbPort": int(j["NbPort"])})
     links = []
     for i in link:
         tmp = []
