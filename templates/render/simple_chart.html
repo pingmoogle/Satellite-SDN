@@ -23,6 +23,7 @@
                             <option value="topo.json">topo</option>
                         </select>
                     </div>
+                    <input type="range" class="custom-range" min="0" max="50" name="sliderTime">
                     <button type="submit" class="btn btn-primary">更换拓扑</button>
                 </form>
             </div>
@@ -32,28 +33,28 @@
                     <label for="exampleFormControlTextarea1">删除节点之间的连接</label>
                     <input class="form-control" id="node1">
                     <input class="form-control" id="node2">
-                    <button onclick="deleteLink()">删除连接</button>
-                    <script>
-                        deleteLink = function (){
-                            const node1 = document.getElementById("node1").value;
-                            const node2 = document.getElementById("node2").value;
-                            for (let i = 0; i < option_graph1.series[0].links.length; i++) {
-                                if (option_graph1.series[0].links[i].source === node1
-                                    && option_graph1.series[0].links[i].target === node2) {
-                                    option_graph1.series[0].links.splice(i, 1)
-                                }
-                                if (option_graph1.series[0].links[i].source === node2
-                                    && option_graph1.series[0].links[i].target === node1) {
-                                    option_graph1.series[0].links.splice(i, 1)
-                                }
-                            }
-                            chart_graph1.setOption(option_graph1);
-                        }
-                    </script>
+
                 </div>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-success">预览效果</button>
+                <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
+                <script>
+                    deleteLink = function (){
+                        const node1 = document.getElementById("node1").value;
+                        const node2 = document.getElementById("node2").value;
+                        for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                            if (option_graph1.series[0].links[i].source === node1
+                                && option_graph1.series[0].links[i].target === node2) {
+                                option_graph1.series[0].links.splice(i, 1)
+                            }
+                            if (option_graph1.series[0].links[i].source === node2
+                                && option_graph1.series[0].links[i].target === node1) {
+                                option_graph1.series[0].links.splice(i, 1)
+                            }
+                        }
+                        chart_graph1.setOption(option_graph1);
+                    }
+                </script>
                 <button type="button" class="btn btn-primary">保存并刷新</button>
             </div>
 
@@ -68,21 +69,11 @@
 
 
 {% block messages %}
-    <div>
-        <p><strong>生成方法：</strong></p>
-        <p>详见generate.py文件</p>
-        <p><strong>下一步工作：</strong></p>
-        <ul>
-            <li>格式化json文件(已完成)</li>
-            <li>制作交换机图标和端口</li>
-
-        </ul>
-        <p><strong>再下一步工作：</strong></p>
-        <ul>
-            <li>在页面上编写控件，通过修改json更新拓扑图</li>
-            <li>[可选] 在拓扑图的组件上使用tooltip</li>
-
-        </ul>
+    <div class="alert alert-primary" role="alert">
+        故障覆盖率
+    </div>
+    <div class="alert alert-primary" role="alert">
+        网络时延
     </div>
 
 {% endblock %}
