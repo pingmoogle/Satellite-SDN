@@ -14,12 +14,18 @@ def seekJson(fileName) -> dict:
     db = client.topos
     db.authenticate("topouser1", "123456")
     collection = db.jsonfiles
-
-    result = collection.find_one({"fileName": "{0}".format(fileName)})
-
+    result = collection.find_one({"fileName": fileName})
     client.close()
     return result["fileRaw"]
 
 
 if __name__ == '__main__':
     pass
+
+
+
+
+
+
+
+
