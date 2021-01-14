@@ -35,27 +35,30 @@
         <div class="col-md-3 col-xl-2 bd-sidebar">
             <br><br><br><br>
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">图表示例</a>
-                <a href="#" class="list-group-item list-group-item-action">高空网络</a>
-                <a href="#" class="list-group-item list-group-item-action">低空网络</a>
-                <a href="#" class="list-group-item list-group-item-action">地面网络</a>
+                <a href="/topoexample" class="list-group-item list-group-item-action {% block ExampleisActive %}{% endblock %}">图表示例</a>
+                <a href="/highlevel" class="list-group-item list-group-item-action {% block HighisActive %}{% endblock %}">高空网络</a>
+                <a href="/lowlevel" class="list-group-item list-group-item-action {% block LowisActive %}{% endblock %}">低空网络</a>
+                <a href="/surfacelevel" class="list-group-item list-group-item-action {% block SurfaceisActive %}{% endblock %}">地面网络</a>
             </div><br>
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">网络雷达</a>
                 <a href="#" class="list-group-item list-group-item-action">指标变化</a>
             </div>
         </div>
-        <main class="col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+        <div class="col-md-9 col-xl-8 py-md-3 pl-md-5" role="main">
             <br><br><br><br>
             {% block title_and_others %}{% endblock %}
-            {% block widget %}{% endblock %}
             {% block graph %}{% endblock %}
             {% block messages %}{% endblock %}
             <hr/>
             <footer>
                 <p>&copy; 2020 - Satellite SDN</p>
             </footer>
-        </main>
+        </div>
+        <div class="d-none d-xl-block col-xl-2">
+            <br><br><br><br>
+            {% block widget %}{% endblock %}
+        </div>
     </div>
 </div>
 

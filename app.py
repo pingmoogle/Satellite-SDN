@@ -20,13 +20,13 @@ def home():
     )
 
 
-@app.route('/topo', methods=['GET', 'POST'])
+@app.route('/topoexample', methods=['GET', 'POST'])
 def topo():
     if request.method == 'POST':
         topoName = request.form.get("TopoName")
         timeSlice = request.form.get("sliderTime")
         generate.newgraph(topoName, int(timeSlice))
-        return  render_template(
+        return render_template(
             "topos/graph_page.html",
             title="Topo Demo",
         )
@@ -35,6 +35,22 @@ def topo():
         "topos/graph_page.html",
         title="Topo Demo",
     )
+
+
+@app.route('/highlevel')
+def highlevel():
+    return render_template("topos/highlevel.html")
+
+
+@app.route('/lowlevel')
+def lowlevel():
+    return render_template('topos/lowlevel.html')
+
+
+@app.route('/surfacelevel')
+def surfacelevel():
+    # TODO: 生成series字符串
+    return render_template('topos/surfacelevel.html', varstring = generate2(seekFile("????")))
 
 
 @app.route("/favicon.ico", methods=['GET'])

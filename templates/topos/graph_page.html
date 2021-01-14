@@ -36,74 +36,23 @@
         <div class="col-md-3 col-xl-2 bd-sidebar">
             <br><br><br><br>
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">图表示例</a>
-                <a href="#" class="list-group-item list-group-item-action">高空网络</a>
-                <a href="#" class="list-group-item list-group-item-action">低空网络</a>
-                <a href="#" class="list-group-item list-group-item-action">地面网络</a>
+                <a href="/topoexample" class="list-group-item list-group-item-action active">图表示例</a>
+                <a href="/highlevel" class="list-group-item list-group-item-action ">高空网络</a>
+                <a href="/lowlevel" class="list-group-item list-group-item-action ">低空网络</a>
+                <a href="/surfacelevel" class="list-group-item list-group-item-action ">地面网络</a>
             </div><br>
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">网络雷达</a>
                 <a href="#" class="list-group-item list-group-item-action">指标变化</a>
             </div>
         </div>
-        <main class="col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+        <div class="col-md-9 col-xl-8 py-md-3 pl-md-5" role="main">
             <br><br><br><br>
             
 
 
             
-    <div class="container">
-        <div class="row">
-            <div class="col-auto mr-auto">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="inputTopo">Topo</label>
-                        <select name="TopoName" id="inputTopo" class="form-control">
-                            <option selected value="topo66.json">topo66</option>
-                            <option value="topo.json">topo</option>
-                        </select>
-                    </div>
-                    <input type="range" class="custom-range" min="0" max="50" name="sliderTime">
-                    <button type="submit" class="btn btn-primary">更换拓扑</button>
-                </form>
-            </div>
-            <div class="col-auto">
-                <div class="form-group">
-
-                    <label for="exampleFormControlTextarea1">删除节点之间的连接</label>
-                    <input class="form-control" id="node1">
-                    <input class="form-control" id="node2">
-
-                </div>
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
-                <script>
-                    deleteLink = function (){
-                        const node1 = document.getElementById("node1").value;
-                        const node2 = document.getElementById("node2").value;
-                        for (let i = 0; i < option_graph1.series[0].links.length; i++) {
-                            if (option_graph1.series[0].links[i].source === node1
-                                && option_graph1.series[0].links[i].target === node2) {
-                                option_graph1.series[0].links.splice(i, 1)
-                            }
-                            if (option_graph1.series[0].links[i].source === node2
-                                && option_graph1.series[0].links[i].target === node1) {
-                                option_graph1.series[0].links.splice(i, 1)
-                            }
-                        }
-                        chart_graph1.setOption(option_graph1);
-                    }
-                </script>
-                <button type="button" class="btn btn-primary">保存并刷新</button>
-            </div>
-
-        </div>
-    </div>
-    <br>
-
-            
-    <div id="graph1" class="chart-container border" style="width:1108px; height:800px;"></div>
+    <div id="graph1" class="chart-container border" style="width:900px; height:500px;"></div>
     <script>
         var chart_graph1 = echarts.init(
             document.getElementById('graph1'), 'white', {renderer: 'canvas'});
@@ -2490,6 +2439,7 @@
     </script>
 
             
+    <br><br>
     <div class="alert alert-primary" role="alert">
         故障覆盖率
     </div>
@@ -2502,7 +2452,62 @@
             <footer>
                 <p>&copy; 2020 - Satellite SDN</p>
             </footer>
-        </main>
+        </div>
+        <div class="d-none d-xl-block col-xl-2">
+            <br><br><br><br>
+            
+    <div class="container">
+        <div class="row">
+            <div class="col-auto mr-auto">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="inputTopo">Topo</label>
+                        <select name="TopoName" id="inputTopo" class="form-control">
+                            <option selected value="topo66.json">topo66</option>
+                            <option value="topo.json">topo</option>
+                        </select>
+                    </div>
+                    <input type="range" class="custom-range" min="0" max="50" name="sliderTime">
+                    <button type="submit" class="btn btn-primary">更换拓扑</button>
+                </form>
+            </div>
+            <br>
+            <div class="col-auto">
+                <div class="form-group">
+
+                    <label for="exampleFormControlTextarea1">删除节点之间的连接</label>
+                    <input class="form-control" id="node1">
+                    <input class="form-control" id="node2">
+
+                </div>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
+                <script>
+                    deleteLink = function (){
+                        const node1 = document.getElementById("node1").value;
+                        const node2 = document.getElementById("node2").value;
+                        for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                            if (option_graph1.series[0].links[i].source === node1
+                                && option_graph1.series[0].links[i].target === node2) {
+                                option_graph1.series[0].links.splice(i, 1)
+                            }
+                            if (option_graph1.series[0].links[i].source === node2
+                                && option_graph1.series[0].links[i].target === node1) {
+                                option_graph1.series[0].links.splice(i, 1)
+                            }
+                        }
+                        chart_graph1.setOption(option_graph1);
+                    }
+                </script>
+                <button type="button" class="btn btn-primary">保存并刷新</button>
+            </div>
+
+        </div>
+    </div>
+    <br>
+
+        </div>
     </div>
 </div>
 

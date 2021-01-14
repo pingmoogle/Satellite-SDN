@@ -10,9 +10,7 @@ def newgraph(filename="topo66.json", timeSlice: int = 0):
     CurrentConfig.GLOBAL_ENV = Environment(loader=FileSystemLoader("templates"))
     c = (
         Graph(init_opts={
-            "chart_id": "graph1",
-            "width": "1108px",
-            "height": "800px"
+            "chart_id": "graph1"
         })
             .add("", nodes, links, repulsion=500, gravity=0.1, symbol_size=50
                  , symbol="image://static/svgs/orange.svg")

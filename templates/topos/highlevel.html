@@ -25,7 +25,6 @@
                     <button type="submit" class="btn btn-primary">更换拓扑</button>
                 </form>
             </div>
-            <br>
             <div class="col-auto">
                 <div class="form-group">
 
@@ -63,19 +62,11 @@
 {% endblock %}
 
 {% block graph %}
-    {{ macro.render_chart_content(chart) }}
+{#    {{ macro.render_chart_content(chart) }}#}
 {% endblock %}
 
 
 {% block messages %}
-    <br><br>
-    <div class="alert alert-primary" role="alert">
-        故障覆盖率
-    </div>
-    <div class="alert alert-primary" role="alert">
-        网络时延
-    </div>
-
 {% endblock %}
 
-{% block ExampleisActive %}active{% endblock %}
+{% block HighisActive %}active{% endblock %}
