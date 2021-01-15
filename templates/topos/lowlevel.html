@@ -11,38 +11,57 @@
 
 {% block widget %}
     <div class="container">
-
-        <div class="col">
-            <div class="alert alert-success" role="alert">
+        <div class="card">
+            <div class="card-header">
                 链接断路模拟
             </div>
-            <div class="input-group">
-                <input class="form-control" id="node1" placeholder="Node 1">
-                <input class="form-control" id="node2" placeholder="Node 2">
+            <div class="card-body">
+                <div class="input-group">
+                    <input class="form-control" id="node1" placeholder="Node 1">
+                    <input class="form-control" id="node2" placeholder="Node 2">
 
+                </div>
+                <br>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                        <script>
+                            deleteLink = function (){
+                                const node1 = document.getElementById("node1").value;
+                                const node2 = document.getElementById("node2").value;
+                                for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                    if (option_graph1.series[0].links[i].source === node1
+                                        && option_graph1.series[0].links[i].target === node2) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                    if (option_graph1.series[0].links[i].source === node2
+                                        && option_graph1.series[0].links[i].target === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                }
+                                chart_graph1.setOption(option_graph1);
+                                document.getElementById("node1").value = "";
+                                document.getElementById("node2").value = "";
+                            }
+                        </script>
+                        <button type="button" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
-        <div class="col">
-            <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
-            <script>
-                deleteLink = function (){
-                    const node1 = document.getElementById("node1").value;
-                    const node2 = document.getElementById("node2").value;
-                    for (let i = 0; i < option_graph1.series[0].links.length; i++) {
-                        if (option_graph1.series[0].links[i].source === node1
-                            && option_graph1.series[0].links[i].target === node2) {
-                            option_graph1.series[0].links.splice(i, 1)
-                        }
-                        if (option_graph1.series[0].links[i].source === node2
-                            && option_graph1.series[0].links[i].target === node1) {
-                            option_graph1.series[0].links.splice(i, 1)
-                        }
-                    }
-                    chart_graph1.setOption(option_graph1);
-                }
-            </script>
-            <button type="button" class="btn btn-primary">保存并刷新</button>
+        <div class="card">
+            <div class="card-header">
+                SSH连接节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="node2connect" placeholder="Node ID">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="connect_btn">连接</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <br>
