@@ -22,6 +22,6 @@ def dealjson(data: str, index: int):
         i["symbol"] = tmp
         del tmp
         ce = opts.GraphLink(source=i["source"], target=i["target"], symbol=i["symbol"])
-        print(i["source"], i["target"], i["symbol"])
+        # print(i["source"], i["target"], i["symbol"])
         links.append(ce)
     return nodes, links

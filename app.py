@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_from_directory
-from topo.funs import generate
+from topo.funs import generate,generate2
 
 app = Flask(__name__)
 
@@ -39,18 +39,20 @@ def topo():
 
 @app.route('/highlevel')
 def highlevel():
-    return render_template("topos/highlevel.html")
+    nodes, links = generate2.json2jsseries("topo.json")
+    return render_template("topos/highlevel.html", nodes=nodes, links=links)
 
 
 @app.route('/lowlevel')
 def lowlevel():
-    return render_template('topos/lowlevel.html')
+    nodes, links = generate2.json2jsseries("topo66.json")
+    return render_template('topos/lowlevel.html', nodes=nodes, links=links)
 
 
 @app.route('/surfacelevel')
 def surfacelevel():
     # TODO: 生成series字符串
-    return render_template('topos/surfacelevel.html', varstring = generate2(seekFile("????")))
+    return render_template('topos/surfacelevel.html')
 
 
 @app.route("/favicon.ico", methods=['GET'])
