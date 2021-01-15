@@ -42,9 +42,9 @@ def highlevel():
     if request.method == 'POST':
         timeSlice = request.form.get("sliderTime")
         nodes, links = generate2.json2jsseries("topo.json", int(timeSlice))
-        return render_template("topos/highlevel.html", nodes=nodes, links=links)
+        return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow=timeSlice)
     nodes, links = generate2.json2jsseries("topo.json")
-    return render_template("topos/highlevel.html", nodes=nodes, links=links)
+    return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow="0")
 
 
 @app.route('/lowlevel')
