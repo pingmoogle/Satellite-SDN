@@ -61,6 +61,9 @@
 
 {% block graph %}
 {#    {{ macro.render_chart_content(chart) }}#}
+    <div class="alert alert-primary" role="alert">
+        高空网络拓扑图
+    </div>
     <div id="graph1" class="chart-container border" style="height:700px;"></div>
     <script>
         var chart_graph1 = echarts.init(
@@ -182,6 +185,15 @@
 };
         chart_graph1.setOption(option_graph1);
         </script>
+    <br>
+    <div class="alert alert-primary" role="alert">
+        网络时延
+    </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">此处 时延折线图</h1>
+        </div>
+    </div>
 {% endblock %}
 
 
