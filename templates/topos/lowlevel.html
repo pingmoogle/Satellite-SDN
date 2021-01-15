@@ -50,16 +50,20 @@
             </div>
         </div>
         <br>
-        <div class="card">
-            <div class="card-header">
-                SSH连接节点
-            </div>
-            <div class="card-body">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="node2connect" placeholder="Node ID">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="connect_btn">连接</button>
-                    </div>
+        <div class="card-body">
+            <div class="input-group">
+                <input type="text" class="form-control" id="node2connect" placeholder="Node ID">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="connect_btn" onclick="terminalWindow()">连接</button>
+                    <script>
+                        function terminalWindow(){
+                            window.open(
+                                "/terminal",
+                                "Web Terminal",
+                                "height=426,width=850,toolbar=no,menubar=no,location=no"
+                            )
+                        }
+                    </script>
                 </div>
             </div>
         </div>

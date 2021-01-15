@@ -59,6 +59,10 @@ def surfacelevel():
     return render_template('topos/surfacelevel.html')
 
 
+@app.route("/terminal")
+def newTerminal():
+    return render_template("terminal.html")
+
 @app.route("/favicon.ico", methods=['GET'])
 def icon():
     return app.send_static_file(

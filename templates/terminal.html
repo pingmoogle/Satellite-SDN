@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.9.0/css/xterm.css" />
+    <meta name="viewport" content="width=device-width, height=device-height ,initial-scale=1.0">
+    <title>Web Terminal</title>
+    <script src="https://cdn.jsdelivr.net/npm/xterm@4.9.0/lib/xterm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.4.0/lib/xterm-addon-fit.min.js"></script>
+</head>
+<body>
+<div id="terminal"></div>
+<script>
+    var term = new Terminal();
+    term.open(document.getElementById('terminal'));
+    term.write('Testing... $ ')
+</script>
+</body>
+</html>
