@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_from_directory
-from topo.funs import generate,generate2
+from topo.funs import generate, generate2
 
 app = Flask(__name__)
 
@@ -37,8 +37,12 @@ def topo():
     )
 
 
-@app.route('/highlevel')
+@app.route('/highlevel', methods=['GET', 'POST'])
 def highlevel():
+    if request.method == 'POST':
+        timeSlice = request.form.get("sliderTime")
+        nodes, links = generate2.json2jsseries("topo.json", int(timeSlice))
+        return render_template("topos/highlevel.html", nodes=nodes, links=links)
     nodes, links = generate2.json2jsseries("topo.json")
     return render_template("topos/highlevel.html", nodes=nodes, links=links)
 
