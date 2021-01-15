@@ -11,39 +11,38 @@
 
 {% block widget %}
     <div class="container">
-        <div class="row">
-            
-            <div class="col-auto">
-                <div class="form-group">
 
-                    <label for="exampleFormControlTextarea1">删除连接</label>
-                    <input class="form-control" id="node1">
-                    <input class="form-control" id="node2">
-
-                </div>
+        <div class="col">
+            <div class="alert alert-success" role="alert">
+                链接断路模拟
             </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
-                <script>
-                    deleteLink = function (){
-                        const node1 = document.getElementById("node1").value;
-                        const node2 = document.getElementById("node2").value;
-                        for (let i = 0; i < option_graph1.series[0].links.length; i++) {
-                            if (option_graph1.series[0].links[i].source === node1
-                                && option_graph1.series[0].links[i].target === node2) {
-                                option_graph1.series[0].links.splice(i, 1)
-                            }
-                            if (option_graph1.series[0].links[i].source === node2
-                                && option_graph1.series[0].links[i].target === node1) {
-                                option_graph1.series[0].links.splice(i, 1)
-                            }
+            <div class="input-group">
+                <input class="form-control" id="node1" placeholder="Node 1">
+                <input class="form-control" id="node2" placeholder="Node 2">
+
+            </div>
+        </div>
+        <br>
+        <div class="col">
+            <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
+            <script>
+                deleteLink = function (){
+                    const node1 = document.getElementById("node1").value;
+                    const node2 = document.getElementById("node2").value;
+                    for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                        if (option_graph1.series[0].links[i].source === node1
+                            && option_graph1.series[0].links[i].target === node2) {
+                            option_graph1.series[0].links.splice(i, 1)
                         }
-                        chart_graph1.setOption(option_graph1);
+                        if (option_graph1.series[0].links[i].source === node2
+                            && option_graph1.series[0].links[i].target === node1) {
+                            option_graph1.series[0].links.splice(i, 1)
+                        }
                     }
-                </script>
-                <button type="button" class="btn btn-primary">保存并刷新</button>
-            </div>
-
+                    chart_graph1.setOption(option_graph1);
+                }
+            </script>
+            <button type="button" class="btn btn-primary">保存并刷新</button>
         </div>
     </div>
     <br>
