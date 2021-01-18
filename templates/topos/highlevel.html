@@ -17,7 +17,8 @@
             </div>
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="range" value="{{ timeNow }}" min="0" max="49" style="width: 88%;" name="sliderTime" oninput="this.nextElementSibling.value = this.value">
+                    <input type="range" value="{{ timeNow }}" min="0" max="49" style="width: 88%;" name="sliderTime"
+                           oninput="this.nextElementSibling.value = this.value">
                     <output>{{ timeNow }}</output>
                     <br>
                     <button type="submit" class="btn btn-primary">更改</button>
@@ -38,28 +39,76 @@
                 <br>
                 <div class="col">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
-                    <script>
-                        deleteLink = function (){
-                            const node1 = document.getElementById("node1").value;
-                            const node2 = document.getElementById("node2").value;
-                            for (let i = 0; i < option_graph1.series[0].links.length; i++) {
-                                if (option_graph1.series[0].links[i].source === node1
-                                    && option_graph1.series[0].links[i].target === node2) {
-                                    option_graph1.series[0].links.splice(i, 1)
+                        <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                        <script>
+                            deleteLink = function () {
+                                const node1 = document.getElementById("node1").value;
+                                const node2 = document.getElementById("node2").value;
+                                for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                    if (option_graph1.series[0].links[i].source === node1
+                                        && option_graph1.series[0].links[i].target === node2) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                    if (option_graph1.series[0].links[i].source === node2
+                                        && option_graph1.series[0].links[i].target === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
                                 }
-                                if (option_graph1.series[0].links[i].source === node2
-                                    && option_graph1.series[0].links[i].target === node1) {
-                                    option_graph1.series[0].links.splice(i, 1)
-                                }
+                                chart_graph1.setOption(option_graph1);
+                                document.getElementById("node1").value = "";
+                                document.getElementById("node2").value = "";
                             }
-                            chart_graph1.setOption(option_graph1);
-                            document.getElementById("node1").value = "";
-                            document.getElementById("node2").value = "";
-                        }
-                    </script>
-                    <button type="button" class="btn btn-primary">保存</button>
-                        </div>
+                        </script>
+                        <button type="button" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                连接到节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="newNodeName">新节点名称</label>
+                        <input type="text" class="form-control" id="newNodeName" placeholder="New Node Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="newNodePort">新节点端口</label>
+                        <input type="text" class="form-control" id="newNodePort" placeholder="New Node Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstNodePort">目的节点名称</label>
+                        <input type="text" class="form-control" id="dstNodeName" placeholder="Destination Node Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstNodePort">目的节点端口</label>
+                        <input type="text" class="form-control" id="dstNodePort" placeholder="Destination Node Name">
+                    </div>
+                    <div class="form-group">
+
+                        <button class="btn btn-success" type="button" id="connect_btn"
+                                onclick="connectNewNode()">添加
+                        </button>
+                        <script>
+                            function connectNewNode() {
+                                newNodeName = document.getElementById("newNodeName").value;
+                                newNodePort = document.getElementById("newNodePort").value;
+                                dstNodeName = document.getElementById("dstNodeName").value;
+                                dstNodePort = document.getElementById("dstNodePort").value;
+
+                                option_graph1.series[0].data.push({"name": newNodeName});
+                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName, 'symbol':[
+                                    'image://static/svgs/3'+newNodePort+'-20e3.svg', 'image://static/svgs/3'+dstNodePort+'-20e3.svg'
+                                    ]});
+                                chart_graph1.setOption(option_graph1);
+
+                            }
+                        </script>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,9 +121,11 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="node2connect" placeholder="Node ID">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="connect_btn" onclick="terminalWindow()">连接</button>
+                        <button class="btn btn-outline-secondary" type="button" id="connect_btn"
+                                onclick="terminalWindow()">连接
+                        </button>
                         <script>
-                            function terminalWindow(){
+                            function terminalWindow() {
                                 window.open(
                                     "/terminal",
                                     "Web Terminal",
@@ -91,7 +142,7 @@
 {% endblock %}
 
 {% block graph %}
-{#    {{ macro.render_chart_content(chart) }}#}
+    {#    {{ macro.render_chart_content(chart) }}#}
     <div class="alert alert-primary" role="alert">
         高空网络拓扑图
     </div>
@@ -101,121 +152,121 @@
             document.getElementById('graph1'), 'white', {renderer: 'canvas'});
 
         var option_graph1 = {
-    "animation": true,
-    "animationThreshold": 2000,
-    "animationDuration": 1000,
-    "animationEasing": "cubicOut",
-    "animationDelay": 0,
-    "animationDurationUpdate": 300,
-    "animationEasingUpdate": "cubicOut",
-    "animationDelayUpdate": 0,
-    "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3",
-        "#f05b72",
-        "#ef5b9c",
-        "#f47920",
-        "#905a3d",
-        "#fab27b",
-        "#2a5caa",
-        "#444693",
-        "#726930",
-        "#b2d235",
-        "#6d8346",
-        "#ac6767",
-        "#1d953f",
-        "#6950a1",
-        "#918597"
-    ],
-    "series": [
-        {
-            "type": "graph",
-            "layout": "force",
-            "symbol": "image://static/svgs/highlevel.svg",
-            "symbolSize": 50,
-            "circular": {
-                "rotateLabel": false
-            },
-            "force": {
-                "repulsion": 500,
-                "edgeLength": 50,
-                "gravity": 0.1
-            },
-            "label": {
-                "show": true,
-                "position": "top",
-                "margin": 8
-            },
-            "lineStyle": {
-                "show": true,
-                "width": 1,
-                "opacity": 1,
-                "curveness": 0,
-                "type": "solid"
-            },
-            "roam": true,
-            "draggable": false,
-            "focusNodeAdjacency": true,
-            "data": {{ nodes | safe }},
-            "edgeLabel": {
-                "show": false,
-                "position": "top",
-                "margin": 8
-            },
-            "edgeSymbol": [
-                null,
-                null
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "color": [
+                "#c23531",
+                "#2f4554",
+                "#61a0a8",
+                "#d48265",
+                "#749f83",
+                "#ca8622",
+                "#bda29a",
+                "#6e7074",
+                "#546570",
+                "#c4ccd3",
+                "#f05b72",
+                "#ef5b9c",
+                "#f47920",
+                "#905a3d",
+                "#fab27b",
+                "#2a5caa",
+                "#444693",
+                "#726930",
+                "#b2d235",
+                "#6d8346",
+                "#ac6767",
+                "#1d953f",
+                "#6950a1",
+                "#918597"
             ],
-            "edgeSymbolSize": 10,
-            "links": {{ links | safe }}
-        }
-    ],
-    "legend": [
-        {
-            "data": [],
-            "selected": {},
-            "show": true,
-            "padding": 5,
-            "itemGap": 10,
-            "itemWidth": 25,
-            "itemHeight": 14
-        }
-    ],
-    "tooltip": {
-        "show": true,
-        "trigger": "item",
-        "triggerOn": "mousemove|click",
-        "axisPointer": {
-            "type": "line"
-        },
-        "showContent": true,
-        "alwaysShowContent": false,
-        "showDelay": 0,
-        "hideDelay": 100,
-        "textStyle": {
-            "fontSize": 14
-        },
-        "borderWidth": 0,
-        "padding": 5
-    },
-    "title": [
-        {
-            "text": "Satellite-sdn HighLevel",
-            "padding": 5,
-            "itemGap": 10
-        }
-    ]
-};
+            "series": [
+                {
+                    "type": "graph",
+                    "layout": "force",
+                    "symbol": "image://static/svgs/highlevel.svg",
+                    "symbolSize": 50,
+                    "circular": {
+                        "rotateLabel": false
+                    },
+                    "force": {
+                        "repulsion": 500,
+                        "edgeLength": 50,
+                        "gravity": 0.1
+                    },
+                    "label": {
+                        "show": true,
+                        "position": "top",
+                        "margin": 8
+                    },
+                    "lineStyle": {
+                        "show": true,
+                        "width": 1,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    },
+                    "roam": true,
+                    "draggable": false,
+                    "focusNodeAdjacency": true,
+                    "data": {{ nodes | safe }},
+                    "edgeLabel": {
+                        "show": false,
+                        "position": "top",
+                        "margin": 8
+                    },
+                    "edgeSymbol": [
+                        null,
+                        null
+                    ],
+                    "edgeSymbolSize": 10,
+                    "links": {{ links | safe }}
+                }
+            ],
+            "legend": [
+                {
+                    "data": [],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "textStyle": {
+                    "fontSize": 14
+                },
+                "borderWidth": 0,
+                "padding": 5
+            },
+            "title": [
+                {
+                    "text": "Satellite-sdn HighLevel",
+                    "padding": 5,
+                    "itemGap": 10
+                }
+            ]
+        };
         chart_graph1.setOption(option_graph1);
-        </script>
+    </script>
     <br>
     <div class="alert alert-primary" role="alert">
         网络时延

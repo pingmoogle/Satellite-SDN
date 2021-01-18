@@ -52,6 +52,54 @@
         <br>
         <div class="card">
             <div class="card-header">
+                连接到节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="newNodeName">新节点名称</label>
+                        <input type="text" class="form-control" id="newNodeName" placeholder="New Node Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="newNodePort">新节点端口</label>
+                        <input type="text" class="form-control" id="newNodePort" placeholder="New Node Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstNodePort">目的节点名称</label>
+                        <input type="text" class="form-control" id="dstNodeName" placeholder="Destination Node Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstNodePort">目的节点端口</label>
+                        <input type="text" class="form-control" id="dstNodePort" placeholder="Destination Node Name">
+                    </div>
+                    <div class="form-group">
+
+                        <button class="btn btn-success" type="button" id="connect_btn"
+                                onclick="connectNewNode()">添加
+                        </button>
+                        <script>
+                            function connectNewNode() {
+                                newNodeName = document.getElementById("newNodeName").value;
+                                newNodePort = document.getElementById("newNodePort").value;
+                                dstNodeName = document.getElementById("dstNodeName").value;
+                                dstNodePort = document.getElementById("dstNodePort").value;
+
+                                option_graph1.series[0].data.push({"name": newNodeName});
+                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName, 'symbol':[
+                                        'image://static/svgs/3'+newNodePort+'-20e3.svg', 'image://static/svgs/3'+dstNodePort+'-20e3.svg'
+                                    ]});
+                                chart_graph1.setOption(option_graph1);
+
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
                 SSH连接节点
             </div>
             <div class="card-body">
