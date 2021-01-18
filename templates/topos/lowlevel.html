@@ -84,7 +84,7 @@
                                 dstNodeName = document.getElementById("dstNodeName").value;
                                 dstNodePort = document.getElementById("dstNodePort").value;
 
-                                option_graph1.series[0].data.push({"name": newNodeName});
+                                option_graph1.series[0].data.push({"name": newNodeName, "symbol":"image://static/svgs/lowlevel_new.svg"});
                                 option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName, 'symbol':[
                                         'image://static/svgs/3'+newNodePort+'-20e3.svg', 'image://static/svgs/3'+dstNodePort+'-20e3.svg'
                                     ]});
@@ -256,10 +256,66 @@
     <div class="alert alert-primary" role="alert">
         网络时延
     </div>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">此处 时延折线图</h1>
-        </div>
+    <div id="timeDelayShow" class="chart-container border" style="height: 400px">
+        <script>
+            function randomData() {
+                now = new Date(+now + oneDay);
+                value = (0.11+ Math.random()*0.02)*1000;
+                return {
+                    name: now.toString(),
+                    value: [
+                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                        Math.round(value)
+                    ]
+                };
+            }
+
+            var data = [];
+            var now = new Date(1997, 9, 3);
+            var oneDay = 24 * 3600 * 1000;
+            var value = 0.11+ Math.random()*0.02;
+            for (var i = 0; i < 20; i++) {
+                data.push(randomData());
+            }
+
+            var time_graph2 = echarts.init(document.getElementById("timeDelayShow"));
+            var option_graph2 = {
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 't/ms',
+                    min: 'dataMin',
+                    max: 'dataMax',
+                    boundaryGap: [0, "100%"],
+                    splitLine: {
+                        show: false
+                    }
+                },
+                series: [{
+                    name: '模拟数据',
+                    type: 'line',
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: data,
+                    color: "#2755A5",
+                    smooth: true
+                }]
+            };
+
+            setInterval(function () {
+
+                data.shift();
+                data.push(randomData());
+                time_graph2.setOption(option_graph2);
+            }, 1000);
+
+        </script>
+
     </div>
 
 {% endblock %}
