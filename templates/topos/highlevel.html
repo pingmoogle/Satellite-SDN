@@ -17,7 +17,7 @@
             </div>
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="range" value="{{ timeNow }}" min="0" max="49" style="width: 88%;" name="sliderTime"
+                    <input type="range" value="{{ timeNow }}" min="0" max="47" style="width: 88%;" name="sliderTime"
                            oninput="this.nextElementSibling.value = this.value">
                     <output>{{ timeNow }}</output>
                     <br>
@@ -59,7 +59,43 @@
                                 document.getElementById("node2").value = "";
                             }
                         </script>
-                        <button type="button" class="btn btn-primary">保存</button>
+{#                        <button type="button" class="btn btn-primary">保存</button>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                删除节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input class="form-control" id="node2delete" placeholder="Node ID">
+                </div>
+                <br>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                        <script>
+                            deleteLink = function () {
+                                const node1 = document.getElementById("node2delete").value;
+                                for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                    if (option_graph1.series[0].links[i].source === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                    if (option_graph1.series[0].links[i].target === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                }
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++){
+                                    if(option_graph1.series[0].data[i].name === node1){
+                                        option_graph1.series[0].data.splice(i, 1)
+                                    }
+                                }
+                                chart_graph1.setOption(option_graph1);
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -270,6 +306,14 @@
     <br>
     <div class="alert alert-primary" role="alert">
         网络时延
+    </div>
+    <div class="form-group">
+        <select class="form-control col-2">
+            <option selected>Choose...</option>
+            <option>H1-H2</option>
+            <option>H1-H3</option>
+            <option>H2-H3</option>
+        </select>
     </div>
     <div id="timeDelayShow" class="chart-container border" style="height: 400px">
         <script>

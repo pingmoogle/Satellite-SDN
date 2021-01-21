@@ -52,6 +52,42 @@
         <br>
         <div class="card">
             <div class="card-header">
+                删除节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input class="form-control" id="node2delete" placeholder="Node ID">
+                </div>
+                <br>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                        <script>
+                            deleteLink = function () {
+                                const node1 = document.getElementById("node2delete").value;
+                                for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                    if (option_graph1.series[0].links[i].source === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                    if (option_graph1.series[0].links[i].target === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                }
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++){
+                                    if(option_graph1.series[0].data[i].name === node1){
+                                        option_graph1.series[0].data.splice(i, 1)
+                                    }
+                                }
+                                chart_graph1.setOption(option_graph1);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
                 连接到节点
             </div>
             <div class="card-body">
