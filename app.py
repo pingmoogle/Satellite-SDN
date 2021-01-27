@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_from_directory
-from topo.funs import generate, generate2
+from topo.funs import generate, generate2, seekFile
 
 app = Flask(__name__)
 
@@ -57,6 +57,30 @@ def lowlevel():
 def surfacelevel():
     # TODO: 考虑删除
     return render_template('topos/surfacelevel.html')
+
+
+@app.route('/diy', methods=['GET', 'POST'])
+def diy():
+    if request.method == "POST":
+        newfile = request.files["newFile"]
+        newfileName = seekFile.uploadFile(newfile)
+        nodes, links = generate2.json2jsseries(filename=newfileName)
+        fh = seekFile.fileHistroy()
+        return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
+                               fileName=newfileName)
+    if request.method == "GET":
+        nodes, links = generate2.json2jsseries(filename="topo.json")
+        fh = seekFile.fileHistroy()
+        return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh)
+
+
+@app.route('/diy-history', methods=['POST'])
+def diyHistory():
+    choice = request.form.get("fileHistory")
+    nodes, links = generate2.json2jsseries(filename=choice)
+    fh = seekFile.fileHistroy()
+    return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
+                           fileName=choice)
 
 
 @app.route("/terminal")
