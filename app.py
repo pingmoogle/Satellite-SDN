@@ -50,6 +50,7 @@ def highlevel():
 @app.route('/lowlevel')
 def lowlevel():
     nodes, links = generate2.json2jsseries("topo66.json")
+    # nodes, links = generate2.txt2jsseries("D:\\Document\\satellite-sdn\\topo\data\\topo2.txt")
     return render_template('topos/lowlevel.html', nodes=nodes, links=links)
 
 

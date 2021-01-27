@@ -25,3 +25,5 @@ def dealjson(data: str, index: int):
         # print(i["source"], i["target"], i["symbol"])
         links.append(ce)
     return nodes, links
+
+

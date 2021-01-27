@@ -18,6 +18,35 @@ def seekJson(fileName) -> dict:
     result = collection.find_one({"fileName": fileName})
     client.close()
     return result["fileRaw"]
+def seekTxt(fileName)->dict:
+    """
+    Get a dict by filename from Mongodb Data Server
+    :param filename: 文件名，无需路径
+    :return:
+    """
+    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
+
+    db = client.topos
+    db.authenticate("topouser1", "123456")
+    collection = db.jsonfiles
+    result = collection.find_one({"fileName": fileName})
+    client.close()
+    return result["fileRaw"]
+
+def seekGml(fileName)->dict:
+    """
+    Get a dict by filename from Mongodb Data Server
+    :param filename: 文件名，无需路径
+    :return:
+    """
+    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
+
+    db = client.topos
+    db.authenticate("topouser1", "123456")
+    collection = db.jsonfiles
+    result = collection.find_one({"fileName": fileName})
+    client.close()
+    return result["fileRaw"]
 
 
 def uploadFile(fileObj):
