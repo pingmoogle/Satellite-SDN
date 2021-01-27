@@ -1,8 +1,6 @@
 {# 渲染图模板 #}
 {% extends "render/topolayout.html" %}
-{% import 'render/macro' as macro %}
 {% block headscript %}
-    {{ macro.render_chart_dependencies(chart) }}
 {% endblock %}
 
 {% block title_and_others %}
@@ -11,38 +9,150 @@
 
 {% block widget %}
     <div class="container">
-
-        <div class="col">
-            <div class="alert alert-success" role="alert">
+        <div class="card">
+            <div class="card-header">
                 链接断路模拟
             </div>
-            <div class="input-group">
-                <input class="form-control" id="node1" placeholder="Node 1">
-                <input class="form-control" id="node2" placeholder="Node 2">
+            <div class="card-body">
+                <div class="input-group">
+                    <input class="form-control" id="node1" placeholder="Node 1">
+                    <input class="form-control" id="node2" placeholder="Node 2">
 
+                </div>
+                <br>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                        <script>
+                            deleteLink = function (){
+                                const node1 = document.getElementById("node1").value;
+                                const node2 = document.getElementById("node2").value;
+                                for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                    if (option_graph1.series[0].links[i].source === node1
+                                        && option_graph1.series[0].links[i].target === node2) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                    if (option_graph1.series[0].links[i].source === node2
+                                        && option_graph1.series[0].links[i].target === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                }
+                                chart_graph1.setOption(option_graph1);
+                                document.getElementById("node1").value = "";
+                                document.getElementById("node2").value = "";
+                            }
+                        </script>
+                        <button type="button" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
-        <div class="col">
-            <button type="button" class="btn btn-success" onclick="deleteLink()">预览效果</button>
-            <script>
-                deleteLink = function (){
-                    const node1 = document.getElementById("node1").value;
-                    const node2 = document.getElementById("node2").value;
-                    for (let i = 0; i < option_graph1.series[0].links.length; i++) {
-                        if (option_graph1.series[0].links[i].source === node1
-                            && option_graph1.series[0].links[i].target === node2) {
-                            option_graph1.series[0].links.splice(i, 1)
-                        }
-                        if (option_graph1.series[0].links[i].source === node2
-                            && option_graph1.series[0].links[i].target === node1) {
-                            option_graph1.series[0].links.splice(i, 1)
-                        }
-                    }
-                    chart_graph1.setOption(option_graph1);
-                }
-            </script>
-            <button type="button" class="btn btn-primary">保存并刷新</button>
+        <div class="card">
+            <div class="card-header">
+                删除节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input class="form-control" id="node2delete" placeholder="Node ID">
+                </div>
+                <br>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                        <script>
+                            deleteLink = function () {
+                                const node1 = document.getElementById("node2delete").value;
+                                for (let i = 0; i < option_graph1.series[0].links.length; i++) {
+                                    if (option_graph1.series[0].links[i].source === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                    if (option_graph1.series[0].links[i].target === node1) {
+                                        option_graph1.series[0].links.splice(i, 1)
+                                    }
+                                }
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++){
+                                    if(option_graph1.series[0].data[i].name === node1){
+                                        option_graph1.series[0].data.splice(i, 1)
+                                    }
+                                }
+                                chart_graph1.setOption(option_graph1);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                连接到节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="newNodeName">新节点名称</label>
+                        <input type="text" class="form-control" id="newNodeName" placeholder="New Node Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="newNodePort">新节点端口</label>
+                        <input type="text" class="form-control" id="newNodePort" placeholder="New Node Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstNodePort">目的节点名称</label>
+                        <input type="text" class="form-control" id="dstNodeName" placeholder="Destination Node Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="dstNodePort">目的节点端口</label>
+                        <input type="text" class="form-control" id="dstNodePort" placeholder="Destination Node Name">
+                    </div>
+                    <div class="form-group">
+
+                        <button class="btn btn-success" type="button" id="connect_btn"
+                                onclick="connectNewNode()">添加
+                        </button>
+                        <script>
+                            function connectNewNode() {
+                                newNodeName = document.getElementById("newNodeName").value;
+                                newNodePort = document.getElementById("newNodePort").value;
+                                dstNodeName = document.getElementById("dstNodeName").value;
+                                dstNodePort = document.getElementById("dstNodePort").value;
+
+                                option_graph1.series[0].data.push({"name": newNodeName, "symbol":"image://static/svgs/lowlevel_new.svg"});
+                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName, 'symbol':[
+                                        'image://static/svgs/3'+newNodePort+'-20e3.svg', 'image://static/svgs/3'+dstNodePort+'-20e3.svg'
+                                    ]});
+                                chart_graph1.setOption(option_graph1);
+
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                SSH连接节点
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="node2connect" placeholder="Node ID">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="connect_btn" onclick="terminalWindow()">连接</button>
+                        <script>
+                            function terminalWindow(){
+                                window.open(
+                                    "/terminal",
+                                    "Web Terminal",
+                                    "height=426,width=850,toolbar=no,menubar=no,location=no"
+                                )
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <br>
@@ -180,10 +290,66 @@
     <div class="alert alert-primary" role="alert">
         网络时延
     </div>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">此处 时延折线图</h1>
-        </div>
+    <div id="timeDelayShow" class="chart-container border" style="height: 400px">
+        <script>
+            function randomData() {
+                now = new Date(+now + oneDay);
+                value = (0.11+ Math.random()*0.02)*1000;
+                return {
+                    name: now.toString(),
+                    value: [
+                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                        Math.round(value)
+                    ]
+                };
+            }
+
+            var data = [];
+            var now = new Date(1997, 9, 3);
+            var oneDay = 24 * 3600 * 1000;
+            var value = 0.11+ Math.random()*0.02;
+            for (var i = 0; i < 20; i++) {
+                data.push(randomData());
+            }
+
+            var time_graph2 = echarts.init(document.getElementById("timeDelayShow"));
+            var option_graph2 = {
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 't/ms',
+                    min: 'dataMin',
+                    max: 'dataMax',
+                    boundaryGap: [0, "100%"],
+                    splitLine: {
+                        show: false
+                    }
+                },
+                series: [{
+                    name: '模拟数据',
+                    type: 'line',
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: data,
+                    color: "#2755A5",
+                    smooth: true
+                }]
+            };
+
+            setInterval(function () {
+
+                data.shift();
+                data.push(randomData());
+                time_graph2.setOption(option_graph2);
+            }, 1000);
+
+        </script>
+
     </div>
 
 {% endblock %}

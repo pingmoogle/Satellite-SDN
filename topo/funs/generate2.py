@@ -1,5 +1,5 @@
 from topo.funs import seekFile
-def json2jsseries(filename,timeSlice=0):
+def json2jsseries(filename, timeSlice=0):
     f = seekFile.seekJson(filename)
     topo_data = f["topo"][timeSlice]["describe"]
     nodes = []

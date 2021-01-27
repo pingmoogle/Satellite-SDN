@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block title_and_others %}
-
 {% endblock %}
 
 {% block widget %}
@@ -83,8 +82,8 @@
                                     option_graph1.series[0].links.splice(i, 1)
                                 }
                             }
-                            for (let i = 0; i < option_graph1.series[0].data.length; i++){
-                                if(option_graph1.series[0].data[i].name === node1){
+                            for (let i = 0; i < option_graph1.series[0].data.length; i++) {
+                                if (option_graph1.series[0].data[i].name === node1) {
                                     option_graph1.series[0].data.splice(i, 1)
                                 }
                             }
@@ -129,10 +128,15 @@
                                 dstNodeName = document.getElementById("dstNodeName").value;
                                 dstNodePort = document.getElementById("dstNodePort").value;
 
-                                option_graph1.series[0].data.push({"name": newNodeName, "symbol": "image://static/svgs/highlevel_new.svg"});
-                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName, 'symbol':[
-                                    'image://static/svgs/3'+newNodePort+'-20e3.svg', 'image://static/svgs/3'+dstNodePort+'-20e3.svg'
-                                    ]});
+                                option_graph1.series[0].data.push({
+                                    "name": newNodeName,
+                                    "symbol": "image://static/svgs/highlevel_new.svg"
+                                });
+                                option_graph1.series[0].links.push({
+                                    'source': newNodeName, 'target': dstNodeName, 'symbol': [
+                                        'image://static/svgs/3' + newNodePort + '-20e3.svg', 'image://static/svgs/3' + dstNodePort + '-20e3.svg'
+                                    ]
+                                });
                                 chart_graph1.setOption(option_graph1);
 
                             }
@@ -172,9 +176,34 @@
 {% endblock %}
 
 {% block graph %}
-    {#    {{ macro.render_chart_content(chart) }}#}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="/diy" method="POST" enctype="multipart/form-data">
+
+                    <label for="newFile">上传新文件，支持json, txt, yml</label>
+                    <input type="file" class="form-control-file" name="newFile">
+
+                    <button type="submit" class="btn btn-primary">上传</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="/diy-history" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="fileHistory">历史记录</label>
+                        <select id="fileHistory" class="form-control" name="fileHistory">
+                            {{ fileHistoryList|safe }}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">重载</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <div class="alert alert-primary" role="alert">
-        高空网络拓扑图
+        自定义文件：{{ fileName }}
     </div>
     <div id="graph1" class="chart-container border" style="height:700px;"></div>
     <script>
@@ -286,14 +315,7 @@
                 },
                 "borderWidth": 0,
                 "padding": 5
-            },
-            "title": [
-                {
-                    "text": "Satellite-sdn HighLevel",
-                    "padding": 5,
-                    "itemGap": 10
-                }
-            ]
+            }
         };
         chart_graph1.setOption(option_graph1);
     </script>
@@ -313,7 +335,7 @@
         <script>
             function randomData() {
                 now = new Date(+now + oneDay);
-                value = (0.11+ Math.random()*0.02)*1000;
+                value = (0.11 + Math.random() * 0.02) * 1000;
                 return {
                     name: now.toString(),
                     value: [
@@ -326,7 +348,7 @@
             var data = [];
             var now = new Date(1997, 9, 3);
             var oneDay = 24 * 3600 * 1000;
-            var value = 0.11+ Math.random()*0.02;
+            var value = 0.11 + Math.random() * 0.02;
             for (var i = 0; i < 20; i++) {
                 data.push(randomData());
             }
@@ -375,4 +397,4 @@
 {% block messages %}
 {% endblock %}
 
-{% block HighisActive %}active{% endblock %}
+{% block DIYActive %}active{% endblock %}
