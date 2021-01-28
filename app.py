@@ -1,7 +1,15 @@
+import re
+
 from flask import Flask, render_template, request, send_from_directory
 from topo.funs import generate, generate2, seekFile
 
 app = Flask(__name__)
+
+differentHandlers = {
+    "txt": generate2.txt2jsseries,
+    "gml": generate2.gml2jsseries,
+    "json": generate2.json2jsseries
+}
 
 
 @app.route('/')
@@ -65,7 +73,8 @@ def diy():
     if request.method == "POST":
         newfile = request.files["newFile"]
         newfileName = seekFile.uploadFile(newfile)
-        nodes, links = generate2.json2jsseries(filename=newfileName)
+        a1 = re.search('(\..*)', newfileName).group(1)
+        nodes, links = differentHandlers[a1[1:]](filename=newfileName)
         fh = seekFile.fileHistroy()
         return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
                                fileName=newfileName)
@@ -78,7 +87,8 @@ def diy():
 @app.route('/diy-history', methods=['POST'])
 def diyHistory():
     choice = request.form.get("fileHistory")
-    nodes, links = generate2.json2jsseries(filename=choice)
+    a1 = re.search('(\..*)', choice).group(1)
+    nodes, links = differentHandlers[a1[1:]](filename=choice)
     fh = seekFile.fileHistroy()
     return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
                            fileName=choice)
@@ -87,6 +97,7 @@ def diyHistory():
 @app.route("/terminal")
 def newTerminal():
     return render_template("terminal.html")
+
 
 @app.route("/favicon.ico", methods=['GET'])
 def icon():

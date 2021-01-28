@@ -1,9 +1,10 @@
 import json
-import pymongo
 import re
 
+import pymongo
 
-def seekJson(fileName) -> dict:
+
+def seekFile(fileName):
     """
     Get a dict by filename from Mongodb Data Server
 
@@ -18,41 +19,16 @@ def seekJson(fileName) -> dict:
     result = collection.find_one({"fileName": fileName})
     client.close()
     return result["fileRaw"]
-def seekTxt(fileName)->dict:
-    """
-    Get a dict by filename from Mongodb Data Server
-    :param filename: 文件名，无需路径
-    :return:
-    """
-    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
-
-    db = client.topos
-    db.authenticate("topouser1", "123456")
-    collection = db.jsonfiles
-    result = collection.find_one({"fileName": fileName})
-    client.close()
-    return result["fileRaw"]
-
-def seekGml(fileName)->dict:
-    """
-    Get a dict by filename from Mongodb Data Server
-    :param filename: 文件名，无需路径
-    :return:
-    """
-    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
-
-    db = client.topos
-    db.authenticate("topouser1", "123456")
-    collection = db.jsonfiles
-    result = collection.find_one({"fileName": fileName})
-    client.close()
-    return result["fileRaw"]
 
 
 def uploadFile(fileObj):
-    fileRawinJSON = json.loads(str(fileObj.read(), encoding="utf-8"))
+    fs = str(fileObj.read(), encoding="utf-8")
+    try:
+        fileRawData = json.loads(fs)
+    except json.decoder.JSONDecodeError:
+        fileRawData = fs
     newFileDict = {
-        "fileRaw": fileRawinJSON,
+        "fileRaw": fileRawData,
         "fileVersion": "v1",
         "fileName": re.search('filename="(.*)"', fileObj.headers.get("Content-Disposition")).group(1)
     }
@@ -66,7 +42,6 @@ def uploadFile(fileObj):
     client.close()
 
     return newFileDict["fileName"]
-
 
 
 def fileHistroy() -> str:
@@ -84,14 +59,6 @@ def fileHistroy() -> str:
     return fh
 
 
-
 if __name__ == '__main__':
-    pass
-
-
-
-
-
-
-
-
+    f = seekFile("topo.json")
+    print(type(f))

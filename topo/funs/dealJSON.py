@@ -1,10 +1,12 @@
+# TODO: 考虑删除
+
 import json
 from pyecharts import options as opts
 from topo.funs import seekFile
 
 
 def dealjson(data: str, index: int):
-    f = seekFile.seekJson(data)
+    f = seekFile.seekFile(data)
     topo_data = f["topo"][index]["describe"]
 
     nodes = []
