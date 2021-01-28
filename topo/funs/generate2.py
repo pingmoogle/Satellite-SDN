@@ -75,10 +75,10 @@ def gml2jsseries(filename, timeSlice=0):
         # nodes_label[id] = label
         nodesList.append(id)
     for i in nodesList:
-        nodes.append({"name": i, 'symbol': "image://static/svgs/lowlevel.svg"})
+        nodes.append({"name": str(i), 'symbol': "image://static/svgs/lowlevel.svg"})
 
     for (v0, v1) in g.edges():
-        edges.append({'source': nodes_id[v1], 'target': nodes_id[v0]})
+        edges.append({'source': str(nodes_id[v1]), 'target': str(nodes_id[v0])})
         # edges.append(nodes_id[v0], nodes_id[v1])
     return nodes, edges
 

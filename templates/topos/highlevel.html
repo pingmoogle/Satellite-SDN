@@ -42,6 +42,8 @@
                         deleteLink = function () {
                             const node1 = document.getElementById("node1").value;
                             const node2 = document.getElementById("node2").value;
+                            console.log(node1)
+                            console.log(node2)
                             for (let i = 0; i < option_graph1.series[0].links.length; i++) {
                                 if (option_graph1.series[0].links[i].source === node1
                                     && option_graph1.series[0].links[i].target === node2) {
@@ -71,9 +73,9 @@
                 </div>
                 <br>
                 <div class="col">
-                    <button type="button" class="btn btn-success" onclick="deleteLink()">预览</button>
+                    <button type="button" class="btn btn-success" onclick="deleteNode()">预览</button>
                     <script>
-                        deleteLink = function () {
+                        deleteNode = function () {
                             const node1 = document.getElementById("node2delete").value;
                             for (let i = 0; i < option_graph1.series[0].links.length; i++) {
                                 if (option_graph1.series[0].links[i].source === node1) {
