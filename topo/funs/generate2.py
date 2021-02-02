@@ -34,7 +34,10 @@ def json2jsseries(filename, timeSlice=0):
         tmp.append("image://static/svgs/3" + str(i["LocalPort"]) + "-20e3.svg")
         tmp.append("image://static/svgs/3" + str(i["NbPort"]) + "-20e3.svg")
         i["symbol"] = tmp
-        ce = {"source": i["source"], "target": i["target"], "symbol": i["symbol"]}
+        ce = {"source": i["source"], "target": i["target"], "symbol": i["symbol"], "tooltip": {
+            "formatter": 'function(x){return x.data.ports[0]+" -> "+x.data.ports[1];}'
+        }}
+        # TODO: 添加tooltip
         links.append(ce)
         del ce
 
@@ -82,6 +85,11 @@ def gml2jsseries(filename, timeSlice=0):
         # edges.append(nodes_id[v0], nodes_id[v1])
     return nodes, edges
 
+
+def appendAction(filename, changes):
+
+    seekFile.uploadFile("name")
+    return filename
 # if __name__ == '__main__':
 # line = '4031 4038\n'
 # a = line.split()

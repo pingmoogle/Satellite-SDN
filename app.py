@@ -95,6 +95,13 @@ def diyHistory():
     return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
                            fileName=choice, title="DIY")
 
+@app.route('/save-changes', methods=["POST"])
+def saveChanges():
+    originPage = "???"
+    newfilename = generate2.appendAction()
+    return render_template("topos/originpage",)
+    #TODO: 添加保存
+
 
 @app.route("/terminal")
 def newTerminal():

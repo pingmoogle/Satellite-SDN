@@ -23,7 +23,7 @@
             </div>
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="range" value="{{ timeNow }}" min="0" max="47" style="width: 88%;" name="sliderTime"
+                    <input id="timeSliceInt" type="range" value="{{ timeNow }}" min="0" max="47" style="width: 88%;" name="sliderTime"
                            oninput="this.nextElementSibling.value = this.value">
                     <output>{{ timeNow }}</output>
                     <br>
@@ -199,7 +199,9 @@
 
                     </div>
                     <script>
+
                         showChanges = function (){
+                            changes["timeSlice"] = document.getElementById("timeSliceInt").value;
                             document.getElementById("changesShow").innerHTML = "<pre>" + JSON.stringify(changes, null, 4) + "</pre>";
                         }
 
