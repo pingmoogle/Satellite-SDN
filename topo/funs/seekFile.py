@@ -11,7 +11,7 @@ def seekFile(fileName):
     :param fileName: 文件名，无需路径
     :return: dict
     """
-    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
+    client = pymongo.MongoClient(host='soowin.icu', port=27017)
 
     db = client.topos
     db.authenticate("topouser1", "123456")
@@ -33,7 +33,7 @@ def uploadFile(fileObj):
         "fileName": re.search('filename="(.*)"', fileObj.headers.get("Content-Disposition")).group(1)
     }
 
-    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
+    client = pymongo.MongoClient(host='soowin.icu', port=27017)
 
     db = client.topos
     db.authenticate("topouser1", "123456")
@@ -46,7 +46,7 @@ def uploadFile(fileObj):
 
 def fileHistroy() -> str:
     fh = ""
-    client = pymongo.MongoClient(host='47.95.110.42', port=27017)
+    client = pymongo.MongoClient(host='soowin.icu', port=27017)
 
     db = client.topos
     db.authenticate("topouser1", "123456")

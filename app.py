@@ -52,14 +52,15 @@ def highlevel():
         nodes, links = generate2.json2jsseries("topo.json", int(timeSlice))
         return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow=timeSlice)
     nodes, links = generate2.json2jsseries("topo.json")
-    return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow="0")
+    return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow="0",
+                           title="高空网络")
 
 
 @app.route('/lowlevel')
 def lowlevel():
     nodes, links = generate2.json2jsseries("topo66.json")
     # nodes, links = generate2.txt2jsseries("D:\\Document\\satellite-sdn\\topo\data\\topo2.txt")
-    return render_template('topos/lowlevel.html', nodes=nodes, links=links)
+    return render_template('topos/lowlevel.html', nodes=nodes, links=links, title="低空网络")
 
 
 @app.route('/surfacelevel')
@@ -77,11 +78,12 @@ def diy():
         nodes, links = differentHandlers[a1[1:]](filename=newfileName)
         fh = seekFile.fileHistroy()
         return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
-                               fileName=newfileName)
+                               fileName=newfileName, title="DIY")
     if request.method == "GET":
         nodes, links = generate2.json2jsseries(filename="topo.json")
         fh = seekFile.fileHistroy()
-        return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh)
+        return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
+                               title="DIY")
 
 
 @app.route('/diy-history', methods=['POST'])
@@ -91,7 +93,7 @@ def diyHistory():
     nodes, links = differentHandlers[a1[1:]](filename=choice)
     fh = seekFile.fileHistroy()
     return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
-                           fileName=choice)
+                           fileName=choice, title="DIY")
 
 
 @app.route("/terminal")

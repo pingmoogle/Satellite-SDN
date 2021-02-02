@@ -394,7 +394,75 @@
         </script>
 
     </div>
+    <br>
+    <div class="alert alert-primary" role="alert">
+        故障覆盖率
+    </div>
+    <div id="errorCoverRate" class="chart-container border" style="height: 400px">
+        <script>
+            var error_graph3 = document.getElementById('errorCoverRate');
+            var myChart = echarts.init(error_graph3);
+            var option;
 
+            option = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    top: '5%',
+                    left: 'center'
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            formatter: ""
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '40',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            {
+                                value: 1048,
+                                name: '运行正常',
+                                itemStyle: {
+                                    color: "#91cc75"
+                                }
+                            },
+                            {
+                                value: 23,
+                                name:"高延迟",
+                                itemStyle: {
+                                    color: "#fac858"
+                                }
+                            },
+                            {
+                                value: 9,
+                                name: '故障',
+                                itemStyle: {
+                                    color: "#ff7070"
+                                }
+                            }
+                        ]
+
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+        </script>
+    </div>
 {% endblock %}
 
 
