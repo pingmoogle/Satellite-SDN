@@ -51,6 +51,35 @@
                             const node2 = document.getElementById("node2").value;
                             console.log(node1)
                             console.log(node2)
+                            for (let i = 0; i < option_graph1.series[0].links.length; i++){
+                                if(
+                                    option_graph1.series[0].links[i].source === node1
+                                    && option_graph1.series[0].links[i].target === node2
+                                ){
+                                    port0 = option_graph1.series[0].links[i].ports[0];
+                                    port1 = option_graph1.series[0].links[i].ports[1];
+                                    for(let everynode = 0; everynode < option_graph1.series[0].data.length; everynode++){
+                                        if(option_graph1.series[0].data[everynode]["name"] == node1){
+                                            for(let portPosition = 0; portPosition < option_graph1.series[0].data[everynode]["ports"].length; portPosition++){
+                                                if (option_graph1.series[0].data[everynode]["ports"][portPosition] == port0){
+                                                    option_graph1.series[0].data[everynode]["ports"].splice(portPosition,1);
+                                                }
+                                            }
+                                        }
+                                        if(option_graph1.series[0].data[everynode]["name"] == node2){
+                                            for(let portPosition = 0; portPosition < option_graph1.series[0].data[everynode]["ports"].length; portPosition++){
+                                                if (option_graph1.series[0].data[everynode]["ports"][portPosition] == port1){
+                                                    option_graph1.series[0].data[everynode]["ports"].splice(portPosition,1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+
                             for (let i = 0; i < option_graph1.series[0].links.length; i++) {
                                 if (option_graph1.series[0].links[i].source === node1
                                     && option_graph1.series[0].links[i].target === node2) {
@@ -85,6 +114,21 @@
                     <script>
                         deleteNode = function () {
                             const node1 = document.getElementById("node2delete").value;
+                            for(let everylink = 0;everylink < option_graph1.series[0].links.length; everylink++){
+                                if (option_graph1.series[0].links[everylink]["source"] == node1){
+                                    target = option_graph1.series[0].links[everylink]["target"];
+                                    port = option_graph1.series[0].links[everylink]["ports"][1];
+                                    for(let everynode = 0; everynode < option_graph1.series[0].data.length; everynode++){
+                                        if(option_graph1.series[0].data[everynode]["name"]==target){
+                                            for(let portPosition = 0; portPosition < option_graph1.series[0].data[everynode]["ports"].length; portPosition++){
+                                                if (option_graph1.series[0].data[everynode]["ports"][portPosition] == port){
+                                                    option_graph1.series[0].data[everynode]["ports"].splice(portPosition,1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             for (let i = 0; i < option_graph1.series[0].links.length; i++) {
                                 if (option_graph1.series[0].links[i].source === node1) {
                                     option_graph1.series[0].links.splice(i, 1)
@@ -117,16 +161,8 @@
                         <input type="text" class="form-control" id="newNodeName" placeholder="New Node Name">
                     </div>
                     <div class="form-group">
-                        <label for="newNodePort">新节点端口</label>
-                        <input type="text" class="form-control" id="newNodePort" placeholder="New Node Port">
-                    </div>
-                    <div class="form-group">
-                        <label for="dstNodePort">目的节点名称</label>
+                        <label for="dstNodePort">连接到节点</label>
                         <input type="text" class="form-control" id="dstNodeName" placeholder="Destination Node Port">
-                    </div>
-                    <div class="form-group">
-                        <label for="dstNodePort">目的节点端口</label>
-                        <input type="text" class="form-control" id="dstNodePort" placeholder="Destination Node Name">
                     </div>
                     <div class="form-group">
 
@@ -134,16 +170,40 @@
                                 onclick="connectNewNode()">添加
                         </button>
                         <script>
+                            findnewNodePort = function (){
+                                let isExist = 0
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++) {
+                                    if ((option_graph1.series[0].data[i])["name"] == newNodeName){
+                                        isExist = 1;
+                                    }
+                                }
+                                if (isExist == 0){
+                                    return "1";
+                                }
+                            }
+                            finddstNodePort = function (){
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++) {
+                                    if ((option_graph1.series[0].data[i])["name"] == dstNodeName){
+                                        for(let newport = 1; ; newport++){
+                                            if ((option_graph1.series[0].data[i])["ports"].indexOf(newport) == -1){
+                                                (option_graph1.series[0].data[i])["ports"].push(newport);
+                                                return newport.toString();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             function connectNewNode() {
                                 newNodeName = document.getElementById("newNodeName").value;
-                                newNodePort = document.getElementById("newNodePort").value;
+                                newNodePort = findnewNodePort();
                                 dstNodeName = document.getElementById("dstNodeName").value;
-                                dstNodePort = document.getElementById("dstNodePort").value;
+                                dstNodePort = finddstNodePort();
 
-                                option_graph1.series[0].data.push({"name": newNodeName, "symbol": "image://static/svgs/highlevel_new.svg"});
-                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName, 'symbol':[
-                                    'image://static/svgs/3'+newNodePort+'-20e3.svg', 'image://static/svgs/3'+dstNodePort+'-20e3.svg'
-                                    ]});
+                                option_graph1.series[0].data.push(
+                                    {"name": newNodeName, "symbol": "image://static/svgs/highlevel_new.svg", "ports": [1]}
+                                );
+                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName,
+                                "tooltip": newNodeName+": "+newNodePort+' -- '+dstNodeName+": "+dstNodePort});
                                 chart_graph1.setOption(option_graph1);
                                 changes.newNodes.push({
                                     "newNodeName": newNodeName,

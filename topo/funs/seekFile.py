@@ -19,7 +19,8 @@ def seekFile(fileName):
     collection = db.jsonfiles
     result = collection.find_one({"fileName": fileName})
     client.close()
-    return result["fileRaw"]
+    if result == None: return None
+    else: return result["fileRaw"]
 
 
 def uploadFile(fileObj):
@@ -50,7 +51,7 @@ def uploadFileWithName(fileObj, fileName):
     newFileDict = {
         "fileRaw": fileObj,
         "fileVersion": "v1",
-        "fileName": fileName + time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())
+        "fileName": fileName
     }
     client = pymongo.MongoClient(host='soowin.icu', port=27017)
 

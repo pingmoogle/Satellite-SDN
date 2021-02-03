@@ -1,4 +1,5 @@
 import json
+import time
 
 import networkx as nx
 
@@ -21,23 +22,29 @@ def json2jsseries(filename, timeSlice=0):
     link = []
 
     for i in topo_data:
-        nodeDict = {}
+        nodeDict = {
+            "ports": []
+        }
         a = str(int(i['LeoID']))
         nodeDict["name"] = a
         # nodeDict["fixed"] = False
         nodeDict['symbol'] = "image://static/svgs/lowlevel.svg"
-        nodes.append(nodeDict)
+        # nodes.append(nodeDict)
         for j in i["neighbor"]:
+            nodeDict["ports"].append(int(j["LocalPort"]))
             link.append({"source": a, "target": str(int(j["NbID"])), "LocalPort": int(j["LocalPort"]),
                          "NbPort": int(j["NbPort"])})
+        nodes.append(nodeDict)
+
     links = []
     for i in link:
         tmp = []
         tmp.append(i["LocalPort"])
         tmp.append(i["NbPort"])
         i["ports"] = tmp
-        ce = {"source": i["source"], "target": i["target"], "ports": i["ports"], "tooltip": i["source"]+": "+str(tmp[0])+" -- "+i["target"]+": "+str(tmp[1])
-        }
+        ce = {"source": i["source"], "target": i["target"], "ports": i["ports"],
+              "tooltip": i["source"] + ": " + str(tmp[0]) + " -- " + i["target"] + ": " + str(tmp[1])
+              }
         links.append(ce)
         del ce
 
@@ -46,9 +53,13 @@ def json2jsseries(filename, timeSlice=0):
 
 def txt2jsseries(filename, timeSlice=0):
     # txt转json函数，返回新json文件名
-    newFilename = txt2json(filename)
-    # 处理新json，返回nodes和links数据
-    return json2jsseries(newFilename)
+    findThisName = filename.split('.')[0] + "txt.json"
+    if seekFile.seekFile(findThisName) == None:
+        newFilename = txt2json(filename)
+        return json2jsseries(newFilename)
+    else:
+        return json2jsseries(findThisName)
+
 
 def txt2json(filename):
     file = seekFile.seekFile(filename)
@@ -61,6 +72,7 @@ def txt2json(filename):
     nodes = {}
     # 统计各节点端口
     allPorts = {}
+    file = file.splitlines()
     for i in file:
         line = i.split()
         if line[0] not in nodes:
@@ -85,16 +97,18 @@ def txt2json(filename):
         newFile["topo"][0]["describe"].append(i)
     # print(newFile)
 
-    jsonFile = json.dumps(newFile)
-    # ToDo 存储新的json文件 文件名：newFilename, 内容：jsonFile
+    seekFile.uploadFileWithName(newFile, newFilename)
     return newFilename
 
 
 def gml2jsseries(filename, timeSlice=0):
     # gml转json函数，返回新json文件名
-    newFilename = gml2json(filename)
-    # 处理新json，返回nodes和links数据
-    return json2jsseries(newFilename)
+    findThisName = filename.split('.')[0] + "gml.json"
+    if seekFile.seekFile(findThisName) == None:
+        newFilename = gml2json(filename)
+        return json2jsseries(newFilename)
+    else:
+        return json2jsseries(findThisName)
 
 
 def gml2json(filename):
@@ -137,17 +151,17 @@ def gml2json(filename):
             {"LocalPort": allPorts[i['target']], "NbID": int(i['source']), "NbPort": allPorts[i['source']]})
     for i in nodes.values():
         newFile["topo"][0]["describe"].append(i)
-    jsonFile = json.dumps(newFile)
-    # print(jsonFile)
-    # ToDo 存储新的json文件 文件名：newFilename, 内容：jsonFile
+
+    seekFile.uploadFileWithName(newFile, newFilename)
     return newFilename
+
 
 def appendAction(filename, changes):
     originFileRaw = seekFile.seekFile(filename)
     originFileRaw["action"] = changes
-    seekFile.uploadFileWithName(originFileRaw, filename)
-    return filename
-
+    newfilename = filename + time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())
+    seekFile.uploadFileWithName(originFileRaw, newfilename)
+    return newfilename
 
 # if __name__ == '__main__':
 # line = '4031 4038\n'
