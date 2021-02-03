@@ -2,6 +2,7 @@
   "topo": [
     {
       "timeSlice": 0,
+      "action":"delete/add",
       "describe": [
         {
           "LeoID": 64,

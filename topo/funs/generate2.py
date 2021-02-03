@@ -1,3 +1,5 @@
+import json
+
 import networkx as nx
 
 from topo.funs import seekFile
@@ -31,13 +33,11 @@ def json2jsseries(filename, timeSlice=0):
     links = []
     for i in link:
         tmp = []
-        tmp.append("image://static/svgs/3" + str(i["LocalPort"]) + "-20e3.svg")
-        tmp.append("image://static/svgs/3" + str(i["NbPort"]) + "-20e3.svg")
-        i["symbol"] = tmp
-        ce = {"source": i["source"], "target": i["target"], "symbol": i["symbol"], "tooltip": {
-            "formatter": 'function(x){return x.data.ports[0]+" -> "+x.data.ports[1];}'
-        }}
-        # TODO: 添加tooltip
+        tmp.append(i["LocalPort"])
+        tmp.append(i["NbPort"])
+        i["ports"] = tmp
+        ce = {"source": i["source"], "target": i["target"], "ports": i["ports"], "tooltip": i["source"]+": "+str(tmp[0])+" -- "+i["target"]+": "+str(tmp[1])
+        }
         links.append(ce)
         del ce
 
@@ -45,23 +45,49 @@ def json2jsseries(filename, timeSlice=0):
 
 
 def txt2jsseries(filename, timeSlice=0):
-    f = seekFile.seekFile(filename)
-    # f = open(filename, mode="r", encoding="utf-8")
-    # file = f.readlines()
-    file = f.strip().splitlines()
+    # txt转json函数，返回新json文件名
+    newFilename = txt2json(filename)
+    # 处理新json，返回nodes和links数据
+    return json2jsseries(newFilename)
 
-    node = {}
-    link = []
+def txt2json(filename):
+    file = seekFile.seekFile(filename)
+    newFilename = filename.split('.')[0] + "txt.json"
+    # print(newFilename)
+    newFile = {}
+    newFile["topo"] = [{"timeSlice": 0, "describe": []}]
+
+    # 节点统计
+    nodes = {}
+    # 统计各节点端口
+    allPorts = {}
     for i in file:
         line = i.split()
-        node[line[0]] = line[0]
-        link.append({"source": line[0], "target": line[1]})
-    nodes = []
-    for i in node:
-        nodeDict = {"name": i}
-        nodeDict['symbol'] = "image://static/svgs/lowlevel.svg"
-        nodes.append(nodeDict)
-    return nodes, link
+        if line[0] not in nodes:
+            nodes[line[0]] = {"LeoID": int(line[0]), "neighbor": []}
+            allPorts[line[0]] = 0
+        if line[1] not in nodes:
+            nodes[line[1]] = {"LeoID": int(line[1]), "neighbor": []}
+            allPorts[line[1]] = 0
+    print(nodes)
+    file.seek(0)
+    for i in file:
+        line = i.split()
+        allPorts[line[0]] = allPorts[line[0]] + 1
+        allPorts[line[1]] = allPorts[line[1]] + 1
+        nodes[line[0]]["neighbor"].append(
+            {"LocalPort": allPorts[line[0]], "NbID": int(line[1]), "NbPort": allPorts[line[1]]})
+        nodes[line[1]]["neighbor"].append(
+            {"LocalPort": allPorts[line[1]], "NbID": int(line[0]), "NbPort": allPorts[line[0]]})
+
+    # print(nodes)
+    for i in nodes.values():
+        newFile["topo"][0]["describe"].append(i)
+    # print(newFile)
+
+    jsonFile = json.dumps(newFile)
+    # ToDo 存储新的json文件 文件名：newFilename, 内容：jsonFile
+    return newFilename
 
 
 def gml2jsseries(filename, timeSlice=0):
