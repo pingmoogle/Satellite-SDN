@@ -1,4 +1,4 @@
-import re
+import re, json
 
 from flask import Flask, render_template, request, send_from_directory
 from topo.funs import generate, generate2, seekFile
@@ -97,9 +97,12 @@ def diyHistory():
 
 @app.route('/save-changes', methods=["POST"])
 def saveChanges():
-    originPage = "???"
-    newfilename = generate2.appendAction()
-    return render_template("topos/originpage",)
+    # filename = request.form.get("fileName")
+    changesAll = json.loads(request.get_data(as_text=True))
+    print(changesAll)
+
+    generate2.appendAction(changesAll.pop("fileName"), changesAll)
+    return 'OK', 200
     #TODO: 添加保存
 
 

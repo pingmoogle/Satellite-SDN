@@ -143,9 +143,12 @@ def gml2json(filename):
     return newFilename
 
 def appendAction(filename, changes):
-
-    seekFile.uploadFile("name")
+    originFileRaw = seekFile.seekFile(filename)
+    originFileRaw["action"] = changes
+    seekFile.uploadFileWithName(originFileRaw, filename)
     return filename
+
+
 # if __name__ == '__main__':
 # line = '4031 4038\n'
 # a = line.split()

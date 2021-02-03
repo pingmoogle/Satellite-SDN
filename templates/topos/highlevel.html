@@ -200,6 +200,7 @@
                     </div>
                     <script>
                         showChanges = function (){
+                            changes["fileName"] = "topo.json";
                             changes["timeSlice"] = document.getElementById("timeSliceInt").value;
                             document.getElementById("changesShow").innerHTML = "<pre>" + JSON.stringify(changes, null, 4) + "</pre>";
                         }

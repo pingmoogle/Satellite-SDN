@@ -1,5 +1,6 @@
 import json
 import re
+import time
 
 import pymongo
 
@@ -42,6 +43,22 @@ def uploadFile(fileObj):
     client.close()
 
     return newFileDict["fileName"]
+
+
+def uploadFileWithName(fileObj, fileName):
+
+    newFileDict = {
+        "fileRaw": fileObj,
+        "fileVersion": "v1",
+        "fileName": fileName + time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())
+    }
+    client = pymongo.MongoClient(host='soowin.icu', port=27017)
+
+    db = client.topos
+    db.authenticate("topouser1", "123456")
+    collection = db.jsonfiles
+    collection.insert_one(newFileDict)
+    client.close()
 
 
 def fileHistroy() -> str:
