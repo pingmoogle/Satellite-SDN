@@ -1,4 +1,5 @@
 import json
+import re
 import time
 
 import networkx as nx
@@ -53,7 +54,7 @@ def json2jsseries(filename, timeSlice=0):
 
 def txt2jsseries(filename, timeSlice=0):
     # txt转json函数，返回新json文件名
-    findThisName = filename.split('.')[0] + "txt.json"
+    findThisName = filename.split('.')[0] + ".txt.json"
     if seekFile.seekFile(findThisName) == None:
         newFilename = txt2json(filename)
         return json2jsseries(newFilename)
@@ -63,7 +64,7 @@ def txt2jsseries(filename, timeSlice=0):
 
 def txt2json(filename):
     file = seekFile.seekFile(filename)
-    newFilename = filename.split('.')[0] + "txt.json"
+    newFilename = filename.split('.')[0] + ".txt.json"
     # print(newFilename)
     newFile = {}
     newFile["topo"] = [{"timeSlice": 0, "describe": []}]
@@ -103,7 +104,7 @@ def txt2json(filename):
 
 def gml2jsseries(filename, timeSlice=0):
     # gml转json函数，返回新json文件名
-    findThisName = filename.split('.')[0] + "gml.json"
+    findThisName = filename.split('.')[0] + ".gml.json"
     if seekFile.seekFile(findThisName) == None:
         newFilename = gml2json(filename)
         return json2jsseries(newFilename)
@@ -116,7 +117,7 @@ def gml2json(filename):
     g = nx.parse_gml(file)
     # g = nx.read_gml(filename)
 
-    newFilename = filename.split('.')[0] + "gml.json"
+    newFilename = filename.split('.')[0] + ".gml.json"
 
     newFile = {}
     newFile["topo"] = [{"timeSlice": 0, "describe": []}]
@@ -159,7 +160,7 @@ def gml2json(filename):
 def appendAction(filename, changes):
     originFileRaw = seekFile.seekFile(filename)
     originFileRaw["action"] = changes
-    newfilename = filename + time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())
+    newfilename = time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime()) + "_" + filename
     seekFile.uploadFileWithName(originFileRaw, newfilename)
     return newfilename
 

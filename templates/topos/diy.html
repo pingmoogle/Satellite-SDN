@@ -33,6 +33,37 @@
                         deleteLink = function () {
                             const node1 = document.getElementById("node1").value;
                             const node2 = document.getElementById("node2").value;
+                            console.log(node1)
+                            console.log(node2)
+                            for (let i = 0; i < option_graph1.series[0].links.length; i++){
+                                if(
+                                    option_graph1.series[0].links[i].source === node1
+                                    && option_graph1.series[0].links[i].target === node2
+                                ){
+                                    port0 = option_graph1.series[0].links[i].ports[0];
+                                    port1 = option_graph1.series[0].links[i].ports[1];
+                                    for(let everynode = 0; everynode < option_graph1.series[0].data.length; everynode++){
+                                        if(option_graph1.series[0].data[everynode]["name"] == node1){
+                                            for(let portPosition = 0; portPosition < option_graph1.series[0].data[everynode]["ports"].length; portPosition++){
+                                                if (option_graph1.series[0].data[everynode]["ports"][portPosition] == port0){
+                                                    option_graph1.series[0].data[everynode]["ports"].splice(portPosition,1);
+                                                }
+                                            }
+                                        }
+                                        if(option_graph1.series[0].data[everynode]["name"] == node2){
+                                            for(let portPosition = 0; portPosition < option_graph1.series[0].data[everynode]["ports"].length; portPosition++){
+                                                if (option_graph1.series[0].data[everynode]["ports"][portPosition] == port1){
+                                                    option_graph1.series[0].data[everynode]["ports"].splice(portPosition,1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+
                             for (let i = 0; i < option_graph1.series[0].links.length; i++) {
                                 if (option_graph1.series[0].links[i].source === node1
                                     && option_graph1.series[0].links[i].target === node2) {
@@ -67,6 +98,21 @@
                     <script>
                         deleteNode = function () {
                             const node1 = document.getElementById("node2delete").value;
+                            for(let everylink = 0;everylink < option_graph1.series[0].links.length; everylink++){
+                                if (option_graph1.series[0].links[everylink]["source"] == node1){
+                                    target = option_graph1.series[0].links[everylink]["target"];
+                                    port = option_graph1.series[0].links[everylink]["ports"][1];
+                                    for(let everynode = 0; everynode < option_graph1.series[0].data.length; everynode++){
+                                        if(option_graph1.series[0].data[everynode]["name"]==target){
+                                            for(let portPosition = 0; portPosition < option_graph1.series[0].data[everynode]["ports"].length; portPosition++){
+                                                if (option_graph1.series[0].data[everynode]["ports"][portPosition] == port){
+                                                    option_graph1.series[0].data[everynode]["ports"].splice(portPosition,1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             for (let i = 0; i < option_graph1.series[0].links.length; i++) {
                                 if (option_graph1.series[0].links[i].source === node1) {
                                     option_graph1.series[0].links.splice(i, 1)
@@ -75,8 +121,8 @@
                                     option_graph1.series[0].links.splice(i, 1)
                                 }
                             }
-                            for (let i = 0; i < option_graph1.series[0].data.length; i++) {
-                                if (option_graph1.series[0].data[i].name === node1) {
+                            for (let i = 0; i < option_graph1.series[0].data.length; i++){
+                                if(option_graph1.series[0].data[i].name === node1){
                                     option_graph1.series[0].data.splice(i, 1)
                                 }
                             }
@@ -99,16 +145,8 @@
                         <input type="text" class="form-control" id="newNodeName" placeholder="New Node Name">
                     </div>
                     <div class="form-group">
-                        <label for="newNodePort">新节点端口</label>
-                        <input type="text" class="form-control" id="newNodePort" placeholder="New Node Port">
-                    </div>
-                    <div class="form-group">
-                        <label for="dstNodePort">目的节点名称</label>
+                        <label for="dstNodePort">连接到节点</label>
                         <input type="text" class="form-control" id="dstNodeName" placeholder="Destination Node Port">
-                    </div>
-                    <div class="form-group">
-                        <label for="dstNodePort">目的节点端口</label>
-                        <input type="text" class="form-control" id="dstNodePort" placeholder="Destination Node Name">
                     </div>
                     <div class="form-group">
 
@@ -116,21 +154,40 @@
                                 onclick="connectNewNode()">添加
                         </button>
                         <script>
+                            findnewNodePort = function (){
+                                let isExist = 0
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++) {
+                                    if ((option_graph1.series[0].data[i])["name"] == newNodeName){
+                                        isExist = 1;
+                                    }
+                                }
+                                if (isExist == 0){
+                                    return "1";
+                                }
+                            }
+                            finddstNodePort = function (){
+                                for (let i = 0; i < option_graph1.series[0].data.length; i++) {
+                                    if ((option_graph1.series[0].data[i])["name"] == dstNodeName){
+                                        for(let newport = 1; ; newport++){
+                                            if ((option_graph1.series[0].data[i])["ports"].indexOf(newport) == -1){
+                                                (option_graph1.series[0].data[i])["ports"].push(newport);
+                                                return newport.toString();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             function connectNewNode() {
                                 newNodeName = document.getElementById("newNodeName").value;
-                                newNodePort = document.getElementById("newNodePort").value;
+                                newNodePort = findnewNodePort();
                                 dstNodeName = document.getElementById("dstNodeName").value;
-                                dstNodePort = document.getElementById("dstNodePort").value;
+                                dstNodePort = finddstNodePort();
 
-                                option_graph1.series[0].data.push({
-                                    "name": newNodeName,
-                                    "symbol": "image://static/svgs/highlevel_new.svg"
-                                });
-                                option_graph1.series[0].links.push({
-                                    'source': newNodeName, 'target': dstNodeName, 'symbol': [
-                                        'image://static/svgs/3' + newNodePort + '-20e3.svg', 'image://static/svgs/3' + dstNodePort + '-20e3.svg'
-                                    ]
-                                });
+                                option_graph1.series[0].data.push(
+                                    {"name": newNodeName, "symbol": "image://static/svgs/highlevel_new.svg", "ports": [1]}
+                                );
+                                option_graph1.series[0].links.push({'source':newNodeName, 'target':dstNodeName,
+                                    "tooltip": newNodeName+": "+newNodePort+' -- '+dstNodeName+": "+dstNodePort});
                                 chart_graph1.setOption(option_graph1);
                                 changes.newNodes.push({
                                     "newNodeName": newNodeName,
@@ -187,15 +244,32 @@
                     </div>
                     <script>
                         showChanges = function (){
+                            changes["fileName"] = "{{ fileName }}";
                             document.getElementById("changesShow").innerHTML = "<pre>" + JSON.stringify(changes, null, 4) + "</pre>";
                         }
-
-
+                        submitChanges = function (){
+                            axios.post('/save-changes',changes).then().catch(function (error){console.log(error)})
+                            $('.toast').toast({delay: 5000});
+                            $(".toast").toast("show");
+                        }
                     </script>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary">确认提交</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitChanges()">确认提交</button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                    <strong class="mr-auto">🟢 保存更改</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    您的更改已保存。 Your changes have been saved.
                 </div>
             </div>
         </div>
@@ -229,7 +303,7 @@
 
         </div>
     </div>
-
+    <br>
     <div class="alert alert-primary" role="alert">
         自定义文件：{{ fileName }}
     </div>
@@ -418,6 +492,75 @@
 
         </script>
 
+    </div>
+    <br>
+    <div class="alert alert-primary" role="alert">
+        故障覆盖率
+    </div>
+    <div id="errorCoverRate" class="chart-container border" style="height: 400px">
+        <script>
+            var error_graph3 = document.getElementById('errorCoverRate');
+            var myChart = echarts.init(error_graph3);
+            var option;
+
+            option = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    top: '5%',
+                    left: 'center'
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            formatter: ""
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '40',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            {
+                                value: 1048,
+                                name: '运行正常',
+                                itemStyle: {
+                                    color: "#91cc75"
+                                }
+                            },
+                            {
+                                value: 23,
+                                name:"高延迟",
+                                itemStyle: {
+                                    color: "#fac858"
+                                }
+                            },
+                            {
+                                value: 9,
+                                name: '故障',
+                                itemStyle: {
+                                    color: "#ff7070"
+                                }
+                            }
+                        ]
+
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+        </script>
     </div>
 {% endblock %}
 

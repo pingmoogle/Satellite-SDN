@@ -35,16 +35,19 @@ def uploadFile(fileObj):
         "fileName": re.search('filename="(.*)"', fileObj.headers.get("Content-Disposition")).group(1)
     }
 
-    client = pymongo.MongoClient(host='soowin.icu', port=27017)
+    if seekFile(newFileDict["fileName"]) == None:
 
-    db = client.topos
-    db.authenticate("topouser1", "123456")
-    collection = db.jsonfiles
-    result = collection.insert_one(newFileDict)
-    client.close()
+        client = pymongo.MongoClient(host='soowin.icu', port=27017)
 
-    return newFileDict["fileName"]
+        db = client.topos
+        db.authenticate("topouser1", "123456")
+        collection = db.jsonfiles
+        result = collection.insert_one(newFileDict)
+        client.close()
 
+        return newFileDict["fileName"]
+
+    else: return newFileDict["fileName"]
 
 def uploadFileWithName(fileObj, fileName):
 
