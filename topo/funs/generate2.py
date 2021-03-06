@@ -16,7 +16,7 @@ def json2jsseries(filename, timeSlice=0):
     功能：把json里的数据格式化成echarts的js形式
 
     :param filename: 文件名（预设topo.json, topo66.json）
-    :param timeSlice: 时间戳，topo.json会用到
+    :param timeSlice: 时间戳，topo.json会用到，没用到的文件默认为0
     :return: 返回nodes的js形式[{"name": NodeName, "symbol": SymbolGraph}, ...]
     links的js形式：[{"source": nodeA, "target": nodeB, "symbol": [出口端口svg, 入口端口svg]}, ...]
     """

@@ -22,7 +22,7 @@
                 高空网络当前时间: {{ timeNow }}
             </div>
             <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="/highlevel" method="post" enctype="multipart/form-data">
                     <input id="timeSliceInt" type="range" value="{{ timeNow }}" min="0" max="47" style="width: 88%;" name="sliderTime"
                            oninput="this.nextElementSibling.value = this.value">
                     <output>{{ timeNow }}</output>

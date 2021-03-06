@@ -1,4 +1,5 @@
-import re, json
+import re
+import json
 
 from flask import Flask, render_template, request
 from topo.funs import generate2, seekFile, users
@@ -23,28 +24,23 @@ def loginPage():
         )
     if request.method == 'POST':
         username = request.form.get("username")
-        userpassword = request.form.get("userpassword")
-        result = users.userCheck(username, userpassword)
+        user_password = request.form.get("userpassword")
+        result = users.userCheck(username, user_password)
         if result is not False:
             return highlevel(username=result)
-
-
-@app.route('/home', methods=['GET', 'POST'])
-def home():
-    return render_template(
-        "index.html",
-        title="Home Page"
-    )
 
 
 @app.route('/highlevel', methods=['GET', 'POST'])
 def highlevel(username=" "):
     if request.method == 'POST':
         timeSlice = request.form.get("sliderTime")
-        if timeSlice == None: timeSlice = 0
+        if timeSlice is None:
+            timeSlice = 0
         nodes, links = generate2.json2jsseries("topo.json", int(timeSlice))
 
-        return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow=timeSlice, userName=username)
+        return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow=timeSlice,
+                               title="高空网络", userName=username)
+
     nodes, links = generate2.json2jsseries("topo.json")
     return render_template("topos/highlevel.html", nodes=nodes, links=links, timeNow="0",
                            title="高空网络", userName=username)
@@ -53,7 +49,6 @@ def highlevel(username=" "):
 @app.route('/lowlevel')
 def lowlevel():
     nodes, links = generate2.json2jsseries("topo66.json")
-    # nodes, links = generate2.txt2jsseries("D:\\Document\\satellite-sdn\\topo\data\\topo2.txt")
     return render_template('topos/lowlevel.html', nodes=nodes, links=links, title="低空网络")
 
 
@@ -71,7 +66,7 @@ def diy():
         nodes, links = generate2.json2jsseries(filename="topo.json")
         fh = seekFile.fileHistroy()
         return render_template("topos/diy.html", nodes=nodes, links=links, timeNow="0", fileHistoryList=fh,
-                               title="DIY")
+                               fileName="topo.json", title="DIY")
 
 
 @app.route('/diy-history', methods=['POST'])
@@ -86,10 +81,8 @@ def diyHistory():
 
 @app.route('/save-changes', methods=["POST"])
 def saveChanges():
-    # filename = request.form.get("fileName")
     changesAll = json.loads(request.get_data(as_text=True))
     print(changesAll)
-
     generate2.appendAction(changesAll.pop("fileName"), changesAll)
     return 'OK', 200
 
