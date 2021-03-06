@@ -1,3 +1,8 @@
+"""
+Mongo Database APIs
+"""
+
+
 import json
 import re
 import time
@@ -75,6 +80,8 @@ def fileHistroy() -> str:
     result = collection.find()
     for i in result:
         thisname = i["fileName"]
+        if thisname.endswith(".txt.json") or thisname.endswith(".gml.json"):
+            continue
         fh = fh + "<option>" + thisname + "</option>"
     client.close()
     return fh
